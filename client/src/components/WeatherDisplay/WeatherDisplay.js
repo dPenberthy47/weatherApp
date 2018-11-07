@@ -5,7 +5,10 @@ const Jumbotron = ({ children }) => (
     style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
     className="jumbotron"
   >
+<<<<<<< HEAD
   WeatherDisplay
+=======
+>>>>>>> 1d637e3182fa82a2e4afb7a52ec93cfb7c035271
     {children}
   </div>
 );

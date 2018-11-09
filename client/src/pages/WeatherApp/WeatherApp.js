@@ -9,20 +9,16 @@ import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
 
-
-
 class WeatherApp extends Component {
     state = {
         latitude: "",
         longitude: "",
-        // c: "",
-        // d: "",
-        weathers: []
+        currentWeather: []
 
     };
 
     componentDidMount() {
-        this.searchWeather("42.3601", "-71.0589");
+        this.searchWeather("32.7767", "-96.7970");
     };
 
     searchWeather = (latitude, longitude) => {
@@ -37,31 +33,40 @@ class WeatherApp extends Component {
         this.setState({
             [name]: value
         });
-    };
+    }; //closes handleInputChange
 
     handleFormSubmit = event => {
         event.preventDefault();
         API.search(
-            this.state.latitude ,
-            this.state.longitude ,
-            // this.state.c,
-            // this.state.d,
+            this.state.latitude,
+            this.state.longitude,
             console.log(`
-            this.state.a = ${this.state.latitude}
-            this.state.b = ${this.state.longitude}
+            latitude = ${this.state.latitude}
+            longitude = ${this.state.longitude}
             `)
-            // this.state.c = ${this.state.c}
-            // this.state.d = ${this.state.d}
-            
+
         )
             .then(res => {
-                // this.setState({ weathers: res.data})
-                console.log(res.data);
-                // console.log(res.data."...");
-                console.log(this.state.weathers);
+                this.setState({ currentWeather: res.data })
+                console.log(this.state.currentWeather);
+                for (var i = 0; i<this.state.currentWeather.alerts.length; i++) {
+                    console.log(this.state.currentWeather.alerts[i]);    
+                }
+                // console.log(this.state.currentWeather.alerts[0]);
+                // console.log(this.state.currentWeather.alerts[0].title);
+                // console.log(this.state.currentWeather.alerts[0].description);
+                console.log(`
+                Current Temp: ${this.state.currentWeather.currently.temperature} 
+                Feels Like: ${this.state.currentWeather.currently.apparentTemperature}
+                Time: ${this.state.currentWeather.currently.time}
+                Summary: ${this.state.currentWeather.currently.summary}
+                Daily High: ${this.state.currentWeather.daily.data[0].temperatureHigh} at ${this.state.currentWeather.daily.data[0].temperatureHighTime}
+                Daily Low: ${this.state.currentWeather.daily.data[0].temperatureLow} at ${this.state.currentWeather.daily.data[0].temperatureLowTime}
+                `)
+
             })
             .catch(error => console.log(error));
-    };
+    }; //closes handleFormSubmit
 
     render() {
         return (
@@ -73,11 +78,21 @@ class WeatherApp extends Component {
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
                 />
-                <WeatherDisplay />
+                <WeatherDisplay>
+                    {/* {this.state.currentWeather.map(current => {
+                        return (
+                            <div>
+                                <p>
+                                    {current.alerts.description}
+                                </p>
+                            </div>
+                        )
+                    })} */}
+                </WeatherDisplay>
                 <HourlyForecast />
                 <Map />
                 <FiveDayForecast />
-                <Footer />                                            
+                <Footer />
             </div>
         )
     }

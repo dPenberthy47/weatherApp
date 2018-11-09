@@ -3,28 +3,25 @@ import API from "../../utils/API";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import LocationSearch from "../../components/LocationSearch";
+import Jumbotron from "../../components/Jumbotron";
 import WeatherDisplay from "../../components/WeatherDisplay";
 import HourlyForecast from "../../components/HourlyForecast";
 import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
+// import Card from "../../components/Card";
 
 class WeatherApp extends Component {
     state = {
-        latitude: "",
-        longitude: "",
-        currentWeather: []
-
-    };
-
-    componentDidMount() {
-        this.searchWeather("32.7767", "-96.7970");
-    };
-
-    searchWeather = (latitude, longitude) => {
-        API.search(latitude, longitude)
-            .then(res => this.setState({ result: res.data }))
-            .catch(err => console.log(err));
+        latitude: "32.7767",
+        longitude: "-96.7970",
+        image: "",
+        currentTemp: "",
+        feelsLike: "",
+        dailyLow: "",
+        dailyHigh: "",
+        currentWeather: [],
+        hourlyWeather: [],
     };
 
     handleInputChange = event => {
@@ -47,25 +44,28 @@ class WeatherApp extends Component {
 
         )
             .then(res => {
-                this.setState({ currentWeather: res.data })
-                console.log(this.state.currentWeather);
-                for (var i = 0; i<this.state.currentWeather.alerts.length; i++) {
-                    console.log(this.state.currentWeather.alerts[i]);    
-                }
-                // console.log(this.state.currentWeather.alerts[0]);
-                // console.log(this.state.currentWeather.alerts[0].title);
-                // console.log(this.state.currentWeather.alerts[0].description);
+                this.setState({
+                    currentWeather: res.data,
+                    image: res.data.currently.icon,
+                    currentTemp: res.data.currently.temperature,
+                    feelsLike: res.data.currently.apparentTemperature,
+                    dailyLow: res.data.daily.data[0].temperatureLow,
+                    dailyHigh: res.data.daily.data[0].temperatureHigh,
+                    hourlyWeather: res.data.hourly.data
+                })
                 console.log(`
-                Current Temp: ${this.state.currentWeather.currently.temperature} 
-                Feels Like: ${this.state.currentWeather.currently.apparentTemperature}
+                Current Temp: ${this.state.currentTemp} 
+                Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
-                Daily High: ${this.state.currentWeather.daily.data[0].temperatureHigh} at ${this.state.currentWeather.daily.data[0].temperatureHighTime}
-                Daily Low: ${this.state.currentWeather.daily.data[0].temperatureLow} at ${this.state.currentWeather.daily.data[0].temperatureLowTime}
+                Daily Low: ${this.state.dailyLow}
+                Daily High: ${this.state.dailyHigh}
                 `)
+                console.log(this.state.currentWeather);
 
             })
             .catch(error => console.log(error));
+
     }; //closes handleFormSubmit
 
     render() {
@@ -78,18 +78,40 @@ class WeatherApp extends Component {
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
                 />
-                <WeatherDisplay>
-                    {/* {this.state.currentWeather.map(current => {
-                        return (
-                            <div>
-                                <p>
-                                    {current.alerts.description}
-                                </p>
-                            </div>
-                        )
-                    })} */}
-                </WeatherDisplay>
-                <HourlyForecast />
+                {/* <Card image={this.state.image} /> */}
+                <Jumbotron>
+                    <WeatherDisplay
+                        image={this.state.image}
+                        currentTemp={this.state.currentTemp}
+                        feelsLike={this.state.feelsLike}
+                        dailyLow={this.state.dailyLow}
+                        dailyHigh={this.state.dailyHigh}
+                    />
+
+                </Jumbotron>
+                {this.state.hourlyWeather.map(hourly => (
+                    <HourlyForecast
+                        hourlyTime={hourly.time}
+                        hourlyTemp={hourly.temperature}
+
+                    />
+                ))}
+
+                {/* {this.state.hourlyWeather.map(hourly, function () {
+                    for (var i = 0; i <= 13; i++) {
+                        {this.state.hourlyWeather.map(hourly => (
+                            <HourlyForecast
+                                hourlyTime={hourly.time}
+                                hourlyTemp={hourly.temperature}
+        
+                            />
+                        ))}
+                    }
+                })} */}
+
+
+
+
                 <Map />
                 <FiveDayForecast />
                 <Footer />

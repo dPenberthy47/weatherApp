@@ -9,7 +9,6 @@ import HourlyForecast from "../../components/HourlyForecast";
 import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
-// import Card from "../../components/Card";
 
 class WeatherApp extends Component {
     state = {
@@ -96,21 +95,6 @@ class WeatherApp extends Component {
 
                     />
                 ))}
-
-                {/* {this.state.hourlyWeather.map(hourly, function () {
-                    for (var i = 0; i <= 13; i++) {
-                        {this.state.hourlyWeather.map(hourly => (
-                            <HourlyForecast
-                                hourlyTime={hourly.time}
-                                hourlyTemp={hourly.temperature}
-        
-                            />
-                        ))}
-                    }
-                })} */}
-
-
-
 
                 <Map />
                 <FiveDayForecast />

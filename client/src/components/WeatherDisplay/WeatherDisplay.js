@@ -1,16 +1,25 @@
 import React from "react";
 import "./WeatherDisplay.css";
-const Jumbotron = ({ children }) => (
+const WeatherDisplay = props => (
   <div
-    style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-    className="jumbotron"
+    style={{ height: 300, clear: "both", paddingTop: 5, textAlign: "center" }}
+    className="WeatherDisplay"
   >
-<<<<<<< HEAD
-  WeatherDisplay
-=======
->>>>>>> 1d637e3182fa82a2e4afb7a52ec93cfb7c035271
-    {children}
+    {/* <img alt={props.name} src={props.image} /> */}
+    <div>
+      <h3>{props.currentTemp}</h3>
+    </div>
+    <div>
+      <h6>{props.feelsLike}</h6>
+    </div>
+    <div>
+      <h6>{props.dailyLow}</h6>
+    </div>
+    <div>
+      <h6>{props.dailyHigh}</h6>
+    </div>
+
   </div>
 );
 
-export default Jumbotron;
+export default WeatherDisplay;

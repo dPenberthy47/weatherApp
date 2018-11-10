@@ -97,7 +97,7 @@ class WeatherApp extends Component {
                     />
                 ))}
 
-               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={5} mapField="temp" />
+               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
                 <FiveDayForecast />
                 <Footer />
             </div>

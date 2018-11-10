@@ -1,10 +1,11 @@
 import React from "react";
 import "./HourlyForecast.css";
 
-const HourlyForecast = () => (
+const HourlyForecast = props => (
     <div>
-HourlyForecast
-    </div>
+    <h5>{props.hourlyTime}</h5>
+    <h6>{props.hourlyTemp}</h6>
+  </div>
 
 );
 

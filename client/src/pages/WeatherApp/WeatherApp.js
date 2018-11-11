@@ -11,6 +11,7 @@ import HourlyForecast from "../../components/HourlyForecast";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
 
+
 class WeatherApp extends Component {
     state = {
         latitude: "32.7767",
@@ -91,10 +92,11 @@ class WeatherApp extends Component {
                 </Jumbotron>
                 {this.state.hourlyWeather.map(hourly => (
                     <HourlyForecast
-                        hourlyTime={hourly.time}
+                         hourlyTime={hourly.time}
                         hourlyTemp={hourly.temperature}
+                      />
 
-                    />
+                    
                 ))}
 
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />

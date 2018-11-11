@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
+import DarkskyMap from 'react-darksky-map';
 import LocationSearch from "../../components/LocationSearch";
 import Jumbotron from "../../components/Jumbotron";
 import WeatherDisplay from "../../components/WeatherDisplay";
 import HourlyForecast from "../../components/HourlyForecast";
-import Map from "../../components/Map";
+//import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
 
@@ -98,7 +99,7 @@ class WeatherApp extends Component {
                     
                 ))}
 
-                <Map />
+               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
                 <FiveDayForecast />
                 <Footer />
             </div>

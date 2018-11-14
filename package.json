@@ -1,0 +1,47 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Weather App built using react.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "PeterJ330",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "gh-pages": "^2.0.1",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "if-env": "^1.0.4",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
+    "mongoose": "^5.3.9",
+    "path": "^0.12.7",
+
+    "prop-types": "^15.6.2",
+    "react-darksky-map": "^0.1.0",
+
+    "react-moment": "^0.8.3",
+
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PeterJ330/weatherApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PeterJ330/weatherApp/issues"
+  },
+  "homepage": "https://github.com/PeterJ330/weatherApp#readme"
+}

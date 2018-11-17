@@ -21,14 +21,20 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "dark-sky": "^1.1.4",
+    "dark-sky-api": "^0.6.32",
     "express": "^4.16.4",
     "if-env": "^1.0.4",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
     "mongoose": "^5.3.9",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react-darksky-map": "^0.1.0",
+    "react-moment": "^0.8.3",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "skycons-ts": "0.0.2"
   },
   "repository": {
     "type": "git",

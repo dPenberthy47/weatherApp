@@ -7,7 +7,8 @@ import moment from 'moment';
 
 const HourlyForecast = props => {
 
-  /* const skycons = new Skycons({'color': 'blue'});  return (
+  /* const skycons = new Skycons({'color': 'blue'}); */
+   return (
 
     <div className="hourlyForecast">
       <h3>

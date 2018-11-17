@@ -55,21 +55,30 @@ class WeatherApp extends Component {
                     image: res.data.currently.icon,
                     currentTemp: res.data.currently.temperature,
                     feelsLike: res.data.currently.apparentTemperature,
+
+                    dailyWeather: res.data.daily.data,
+                    hourlyWeather: res.data.hourly.data
+=======
                     dailyLow: res.data.daily.data[0].temperatureLow,
                     dailyHigh: res.data.daily.data[0].temperatureHigh,
                     hourlyWeather: res.data.hourly.data, 
                     dewPoint: res.data.currently.dewPoint,
                     precipChance: res.data.currently.precipProbability,
+
                 })
                 console.log(`
                 Current Temp: ${this.state.currentTemp} 
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
+
+
+=======
                 Daily Low: ${this.state.dailyLow}
                 Daily High: ${this.state.dailyHigh}
                 Dew Point: ${this.state.dewPoint}
                 Precip Chance: ${this.state.precipChance}
+
                 `)
                 console.log(this.state.currentWeather);
 
@@ -77,6 +86,12 @@ class WeatherApp extends Component {
             .catch(error => console.log(error));
 
     }; //closes handleFormSubmit
+
+
+    sliceHourlyArray = array => {
+        //need to .map through the api parameters
+    }
+
 
 
     componentWillMount() {
@@ -95,6 +110,13 @@ class WeatherApp extends Component {
                     image: res.data.currently.icon,
                     currentTemp: res.data.currently.temperature,
                     feelsLike: res.data.currently.apparentTemperature,
+
+                    dailyWeather: res.data.daily.data,
+                    hourlyWeather: res.data.hourly.data
+                })
+                console.log(`
+                Current Temp: ${this.state.currentTemp}
+
                     dailyLow: res.data.daily.data[0].temperatureLow,
                     dailyHigh: res.data.daily.data[0].temperatureHigh,
                     hourlyWeather: res.data.hourly.data,
@@ -103,15 +125,22 @@ class WeatherApp extends Component {
                 })
                 console.log(`
                 Current Temp: ${this.state.currentTemp} 
+
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
                 Daily Low: ${this.state.dailyLow}
                 Daily High: ${this.state.dailyHigh}
+
+                `)
+                console.log(this.state.currentWeather);
+ 
+
                 Dew Point: ${this.state.dewPoint}
                 Precip Chance: ${this.state.precipChance}
                 `)
                 console.log(this.state.currentWeather);
+
 
             })
             .catch(error => console.log(error));
@@ -140,6 +169,18 @@ class WeatherApp extends Component {
 
                 </Jumbotron>
 
+                <div id="scrollContainer">
+                {this.state.hourlyWeather.map((hourly, i) => (
+                    <HourlyForecast
+                        hourlyIcon={hourly.icon}
+                        hourlyTime={hourly.time}
+                        hourlyTemp={hourly.temperature}
+                        hourlyPrecip={hourly.precipProbability}
+                    />
+                ))}
+                </div>
+
+
                 {this.state.hourlyWeather.map(hourly => (
                     <HourlyForecast
                         hourlyTime={hourly.time}
@@ -148,6 +189,7 @@ class WeatherApp extends Component {
                 ))}
 
                
+
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
                
                <Jumbotron>

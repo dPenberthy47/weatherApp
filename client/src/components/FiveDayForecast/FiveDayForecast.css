@@ -1,0 +1,34 @@
+#scrollContainer5 {
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(70, 130, 180, 0.3);
+    margin-bottom: 50px;
+    
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+#scrollContainer5::-webkit-scrollbar {
+    display: none;
+}
+
+.fiveDayForecast {
+    border-right: 1px solid rgba(70, 130, 180, 0.5);
+    text-align: center;
+    display: inline-block;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+p {
+    font-size: 12px;
+}

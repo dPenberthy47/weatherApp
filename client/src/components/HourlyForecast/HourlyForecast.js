@@ -1,15 +1,17 @@
 import React from "react";
 import "./HourlyForecast.css";
-import {Skycons} from 'skycons-ts';
+/*import {Skycons} from 'skycons-ts';*/
+import moment from 'moment';
+
 
 const HourlyForecast = props => {
 
-  const skycons = new Skycons({'color': 'blue'});
+  /* const skycons = new Skycons({'color': 'blue'});
     // on Android, a nasty hack is needed: {'resizeClear': true}
  
     // you can add a canvas by it's ID...
   skycons.add(props.hourlyIcon, props.hourlyIcon);
-
+*/
   return (
 
     <div className="hourlyForecast">
@@ -18,14 +20,14 @@ const HourlyForecast = props => {
       </h3>
 
       <h3>
-        {props.hourlyTime}
+        {moment(props.hourlyTime * 1000).format('LT')}
       </h3>
   
-      <h4>
+      <h4> Temp:
         {props.hourlyTemp}
       </h4>
       
-      <h4>
+      <h4>Precipitation:
         {props.hourlyPrecip}
       </h4>
     </div>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import DarkskyMap from 'react-darksky-map';
 import LocationSearch from "../../components/LocationSearch";
@@ -22,6 +21,7 @@ class WeatherApp extends Component {
         dailyLow: "",
         dailyHigh: "",
         currentWeather: [],
+        dailyWeather: [],
         hourlyWeather: [],
     };
 
@@ -107,7 +107,6 @@ class WeatherApp extends Component {
     render() {
         return (
             <div>
-                <Header />
                 <Navbar />
                 <LocationSearch
                     value={this.state.search}
@@ -130,13 +129,30 @@ class WeatherApp extends Component {
                     <HourlyForecast
                         hourlyIcon={hourly.icon}
                         hourlyTime={hourly.time}
-                        hourlyTemp={hourly.temperature}
+                        hourlyTemp= {hourly.temperature}
                         hourlyPrecip={hourly.precipProbability}
+                        key={i}
                     />
                 ))}
                 </div>
+
+                  <div id="scrollContainer5">
+                {this.state.dailyWeather.map((daily, i) => (
+                    <FiveDayForecast
+                        date={daily.time}
+                        dailyIcon={daily.icon}
+                        dailySummary={daily.summary}
+                        dailyTempHigh= {daily.temperatureMax}
+                        dailyTempLow= {daily.temperatureMin}
+                        dailyPrecip={daily.precipProbability}
+                        key2={i}
+                    />
+                ))} 
+                </div>
+
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
-                <FiveDayForecast />
+
+              
                 <Footer />
             </div>
         )

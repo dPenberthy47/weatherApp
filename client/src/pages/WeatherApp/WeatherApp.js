@@ -55,13 +55,10 @@ class WeatherApp extends Component {
                     image: res.data.currently.icon,
                     currentTemp: res.data.currently.temperature,
                     feelsLike: res.data.currently.apparentTemperature,
-
                     dailyWeather: res.data.daily.data,
-                    hourlyWeather: res.data.hourly.data
-=======
+                    hourlyWeather: res.data.hourly.data,
                     dailyLow: res.data.daily.data[0].temperatureLow,
                     dailyHigh: res.data.daily.data[0].temperatureHigh,
-                    hourlyWeather: res.data.hourly.data, 
                     dewPoint: res.data.currently.dewPoint,
                     precipChance: res.data.currently.precipProbability,
 
@@ -71,9 +68,6 @@ class WeatherApp extends Component {
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
-
-
-=======
                 Daily Low: ${this.state.dailyLow}
                 Daily High: ${this.state.dailyHigh}
                 Dew Point: ${this.state.dewPoint}
@@ -110,36 +104,25 @@ class WeatherApp extends Component {
                     image: res.data.currently.icon,
                     currentTemp: res.data.currently.temperature,
                     feelsLike: res.data.currently.apparentTemperature,
-
-                    dailyWeather: res.data.daily.data,
+                    dailyLow: res.data.daily.data[0].temperatureLow,
+                    dailyHigh: res.data.daily.data[0].temperatureHigh, 
+                    dailyWeather: res.data.daily.data,         
                     hourlyWeather: res.data.hourly.data
                 })
-                console.log(`
-                Current Temp: ${this.state.currentTemp}
-
-                    dailyLow: res.data.daily.data[0].temperatureLow,
-                    dailyHigh: res.data.daily.data[0].temperatureHigh,
-                    hourlyWeather: res.data.hourly.data,
-                    dewPoint: res.data.currently.dewPoint,
-                    precipChance: res.data.currently.precipProbability,
-                })
+        
                 console.log(`
                 Current Temp: ${this.state.currentTemp} 
-
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
-                Daily Low: ${this.state.dailyLow}
-                Daily High: ${this.state.dailyHigh}
-
+                DailyLow: ${this.state.dailyLow}
+                DailyHigh: ${this.state.dailyHigh}
                 `)
                 console.log(this.state.currentWeather);
  
 
-                Dew Point: ${this.state.dewPoint}
-                Precip Chance: ${this.state.precipChance}
-                `)
-                console.log(this.state.currentWeather);
+               
+                
 
 
             })

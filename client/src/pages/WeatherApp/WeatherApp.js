@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import LocationSearch from "../../components/LocationSearch";
 import Jumbotron from "../../components/Jumbotron";
@@ -27,6 +26,7 @@ class WeatherApp extends Component {
         dewPoint: "",
         precipChance: "",
         currentWeather: [],
+        dailyWeather: [],
         hourlyWeather: [],
     };
 
@@ -149,7 +149,6 @@ class WeatherApp extends Component {
     render() {
         return (
             <div>
-                <Header />
                 <Navbar />
                 
                 <LocationSearch
@@ -174,27 +173,31 @@ class WeatherApp extends Component {
                     <HourlyForecast
                         hourlyIcon={hourly.icon}
                         hourlyTime={hourly.time}
-                        hourlyTemp={hourly.temperature}
+                        hourlyTemp= {hourly.temperature}
                         hourlyPrecip={hourly.precipProbability}
+                        key={i}
                     />
                 ))}
                 </div>
 
 
-                {this.state.hourlyWeather.map(hourly => (
-                    <HourlyForecast
-                        hourlyTime={hourly.time}
-                        hourlyTemp={hourly.temperature}
-                      />
-                ))}
-
-               
+                  <div id="scrollContainer5">
+                {this.state.dailyWeather.map((daily, i) => (
+                    <FiveDayForecast
+                        date={daily.time}
+                        dailyIcon={daily.icon}
+                        dailySummary={daily.summary}
+                        dailyTempHigh= {daily.temperatureMax}
+                        dailyTempLow= {daily.temperatureMin}
+                        dailyPrecip={daily.precipProbability}
+                        key2={i}
+                    />
+                ))} 
+                </div>
 
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
-               
-               <Jumbotron>
-                <FiveDayForecast />
-                </Jumbotron>
+
+              
 
                 <Footer />
             </div>

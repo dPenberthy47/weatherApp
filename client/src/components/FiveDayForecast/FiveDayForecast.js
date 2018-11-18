@@ -1,11 +1,7 @@
 import React from "react";
 import "./FiveDayForecast.css";
-import moment from 'moment';
-
 
 const FiveDayForecast = props => {
-
-
     return (
   
       <div className="fiveDayForecast">

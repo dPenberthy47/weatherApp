@@ -6,12 +6,8 @@ import Jumbotron from "../../components/Jumbotron";
 import WeatherDisplay from "../../components/WeatherDisplay";
 import HourlyForecast from "../../components/HourlyForecast";
 import DarkskyMap from 'react-darksky-map';
-//import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
-// import Moment from "react-moment";
-
-// var moment = require("moment");
 
 
 class WeatherApp extends Component {
@@ -28,6 +24,7 @@ class WeatherApp extends Component {
         currentWeather: [],
         dailyWeather: [],
         hourlyWeather: [],
+        dailyWeather: [],
     };
 
     handleInputChange = event => {
@@ -104,10 +101,12 @@ class WeatherApp extends Component {
                     image: res.data.currently.icon,
                     currentTemp: res.data.currently.temperature,
                     feelsLike: res.data.currently.apparentTemperature,
+                    dailyWeather: res.data.daily.data,
                     dailyLow: res.data.daily.data[0].temperatureLow,
-                    dailyHigh: res.data.daily.data[0].temperatureHigh, 
-                    dailyWeather: res.data.daily.data,         
-                    hourlyWeather: res.data.hourly.data
+                    dailyHigh: res.data.daily.data[0].temperatureHigh,
+                    hourlyWeather: res.data.hourly.data, 
+                    dewPoint: res.data.currently.dewPoint,
+                    precipChance: res.data.currently.precipProbability,
                 })
         
                 console.log(`
@@ -119,19 +118,24 @@ class WeatherApp extends Component {
                 DailyHigh: ${this.state.dailyHigh}
                 `)
                 console.log(this.state.currentWeather);
- 
+                              
+                Daily Low: ${this.state.dailyLow}
+                Daily High: ${this.state.dailyHigh}
+                Dew Point: ${this.state.dewPoint}
+                Precip Chance: ${this.state.precipChance}
 
-               
-                
-
+                `)
+                console.log(this.state.currentWeather);
 
             })
             .catch(error => console.log(error));
-    };
+
+    }; //closes handleFormSubmit
 
     render() {
         return (
             <div>
+
                 <Navbar />
                 
                 <LocationSearch
@@ -154,6 +158,7 @@ class WeatherApp extends Component {
                 <div id="scrollContainer">
                 {this.state.hourlyWeather.map((hourly, i) => (
                     <HourlyForecast
+                    
                         hourlyIcon={hourly.icon}
                         hourlyTime={hourly.time}
                         hourlyTemp= {hourly.temperature}
@@ -162,6 +167,7 @@ class WeatherApp extends Component {
                     />
                 ))}
                 </div>
+
 
 
                   <div id="scrollContainer5">
@@ -181,6 +187,22 @@ class WeatherApp extends Component {
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
 
               
+
+                <div id="scrollContainer">
+                {this.state.dailyWeather.map((daily, i) => (
+                    <FiveDayForecast
+                        date={daily.time}
+                        dailySummary={daily.summary}
+                        dailyTemp= {daily.temperature}
+                        dailyPrecip={daily.precipProbability}
+                        key={i}
+                    />
+                ))} 
+                </div>
+               
+
+               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
+                                                                         
 
                 <Footer />
             </div>

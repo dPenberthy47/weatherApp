@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-// import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import LocationSearch from "../../components/LocationSearch";
 import Jumbotron from "../../components/Jumbotron";
@@ -23,6 +22,7 @@ class WeatherApp extends Component {
         dewPoint: "",
         precipChance: "",
         currentWeather: [],
+        dailyWeather: [],
         hourlyWeather: [],
         dailyWeather: [],
     };
@@ -53,9 +53,9 @@ class WeatherApp extends Component {
                     currentTemp: res.data.currently.temperature,
                     feelsLike: res.data.currently.apparentTemperature,
                     dailyWeather: res.data.daily.data,
+                    hourlyWeather: res.data.hourly.data,
                     dailyLow: res.data.daily.data[0].temperatureLow,
                     dailyHigh: res.data.daily.data[0].temperatureHigh,
-                    hourlyWeather: res.data.hourly.data, 
                     dewPoint: res.data.currently.dewPoint,
                     precipChance: res.data.currently.precipProbability,
 
@@ -65,9 +65,6 @@ class WeatherApp extends Component {
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
-
-
-
                 Daily Low: ${this.state.dailyLow}
                 Daily High: ${this.state.dailyHigh}
                 Dew Point: ${this.state.dewPoint}
@@ -110,13 +107,18 @@ class WeatherApp extends Component {
                     hourlyWeather: res.data.hourly.data, 
                     dewPoint: res.data.currently.dewPoint,
                     precipChance: res.data.currently.precipProbability,
-
                 })
+        
                 console.log(`
                 Current Temp: ${this.state.currentTemp} 
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
+                DailyLow: ${this.state.dailyLow}
+                DailyHigh: ${this.state.dailyHigh}
+                `)
+                console.log(this.state.currentWeather);
+                              
                 Daily Low: ${this.state.dailyLow}
                 Daily High: ${this.state.dailyHigh}
                 Dew Point: ${this.state.dewPoint}
@@ -133,7 +135,7 @@ class WeatherApp extends Component {
     render() {
         return (
             <div>
-                {/* <Header /> */}
+
                 <Navbar />
                 
                 <LocationSearch
@@ -159,12 +161,32 @@ class WeatherApp extends Component {
                     
                         hourlyIcon={hourly.icon}
                         hourlyTime={hourly.time}
-                        hourlyTemp={hourly.temperature}
+                        hourlyTemp= {hourly.temperature}
                         hourlyPrecip={hourly.precipProbability}
                         key={i}
                     />
                 ))}
                 </div>
+
+
+
+                  <div id="scrollContainer5">
+                {this.state.dailyWeather.map((daily, i) => (
+                    <FiveDayForecast
+                        date={daily.time}
+                        dailyIcon={daily.icon}
+                        dailySummary={daily.summary}
+                        dailyTempHigh= {daily.temperatureMax}
+                        dailyTempLow= {daily.temperatureMin}
+                        dailyPrecip={daily.precipProbability}
+                        key2={i}
+                    />
+                ))} 
+                </div>
+
+               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
+
+              
 
                 <div id="scrollContainer">
                 {this.state.dailyWeather.map((daily, i) => (
@@ -180,11 +202,7 @@ class WeatherApp extends Component {
                
 
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
-               
-               
-             
-                
-                
+                                                                         
 
                 <Footer />
             </div>

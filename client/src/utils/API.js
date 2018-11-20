@@ -11,7 +11,7 @@ export default {
         + FORECAST
         + APIKEY
         + latitude + "," + longitude
-        // + ",255657600?exclude=currently,flags" 
         );
   }
 };
+

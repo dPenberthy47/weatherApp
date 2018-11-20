@@ -1,5 +1,6 @@
 import React from "react";
 import "./FiveDayForecast.css";
+import moment from "moment";
 
 const FiveDayForecast = props => {
     return (
@@ -19,16 +20,18 @@ const FiveDayForecast = props => {
           {props.dailySummary}
         </h3>
     
-        <h4> Temp High:
-          {props.dailyTempHigh}
+        <h4> High:
+          {Math.round(props.dailyTempHigh)}°
         </h4>
         
-        <h4> Temp Low:
-          {props.dailyTempLow}
+        <h4> Low:
+          {Math.round(props.dailyTempLow)}°
         </h4>
         
-        <h4>Precipitation:
-          {props.dailyPrecip}
+        <h4>Chance of Rain:
+          {/* {props.dailyPrecip} */}
+          {Math.round(props.dailyPrecip * 100)}%
+          
         </h4>
 
 

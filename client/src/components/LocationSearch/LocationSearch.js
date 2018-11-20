@@ -16,6 +16,12 @@ const LocationSearch = props => (
       <input
         onChange={props.handleInputChange}
         value={props.value}
+        name="address" type="text" className="form-control" placeholder="Add a Location" id="address"
+      />
+      <br />
+      {/* <input
+        onChange={props.handleInputChange}
+        value={props.value}
         name="latitude" type="text" className="form-control" placeholder="Latitude" id="latitude"
       />
       <br />
@@ -23,12 +29,12 @@ const LocationSearch = props => (
         onChange={props.handleInputChange}
         value={props.value}
         name="longitude" type="text" className="form-control" placeholder="longitude" id="longitude"
-      />
+      /> */}
       <button
         onClick={props.handleFormSubmit}
         className="btn btn-primary"
       >
-        Add
+        +
       </button>
     </div>
   </form>

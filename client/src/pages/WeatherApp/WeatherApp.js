@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import GeoCodeAPI from "../../utils/GeoCodeAPI";
 import Navbar from "../../components/Navbar";
 import LocationSearch from "../../components/LocationSearch";
 import Jumbotron from "../../components/Jumbotron";
-import WeatherDisplay from "../../components/WeatherDisplay";
+import CurrentWeather from "../../components/CurrentWeather";
 import HourlyForecast from "../../components/HourlyForecast";
 import DarkskyMap from 'react-darksky-map';
 import FiveDayForecast from "../../components/FiveDayForecast";
@@ -12,8 +13,10 @@ import Footer from "../../components/Footer";
 
 class WeatherApp extends Component {
     state = {
-        latitude: "32.7767",
-        longitude: "-96.7970",
+        geoCode: [] ,
+        address: "1600+Amphitheatre+Parkway,+Mountain+View,+CA",
+        latitude: "",
+        longitude: "",
         image: "",
         currentTemp: "",
         feelsLike: "",
@@ -24,7 +27,6 @@ class WeatherApp extends Component {
         currentWeather: [],
         dailyWeather: [],
         hourlyWeather: [],
-        dailyWeather: [],
     };
 
     handleInputChange = event => {
@@ -37,6 +39,27 @@ class WeatherApp extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        GeoCodeAPI.search(
+            this.state.address,
+            console.log(`
+            address = ${this.state.address}
+            `)
+        )
+        .then(res => {
+            this.setState({
+                geoCode: res.data,
+                latitude: res.data.results[0].geometry.location.lat,
+                longitude: res.data.results[0].geometry.location.lng,
+            })
+            console.log(`address = ${this.state.address}`);
+            console.log(this.state.geoCode);
+            console.log(`
+            latitude = ${this.state.latitude}
+            longitude = ${this.state.longitude}
+            `)
+        // })
+        // .catch(error => console.log(error));
+
         API.search(
             this.state.latitude,
             this.state.longitude,
@@ -46,37 +69,38 @@ class WeatherApp extends Component {
             `)
 
         )
-            .then(res => {
-                this.setState({
-                    currentWeather: res.data,
-                    image: res.data.currently.icon,
-                    currentTemp: res.data.currently.temperature,
-                    feelsLike: res.data.currently.apparentTemperature,
-                    dailyWeather: res.data.daily.data,
-                    hourlyWeather: res.data.hourly.data,
-                    dailyLow: res.data.daily.data[0].temperatureLow,
-                    dailyHigh: res.data.daily.data[0].temperatureHigh,
-                    dewPoint: res.data.currently.dewPoint,
-                    precipChance: res.data.currently.precipProbability,
+        .then(res => {
+            this.setState({
+                currentWeather: res.data,
+                image: res.data.currently.icon,
+                currentTemp: res.data.currently.temperature,
+                feelsLike: res.data.currently.apparentTemperature,
+                dailyWeather: res.data.daily.data,
+                hourlyWeather: res.data.hourly.data,
+                dailyLow: res.data.daily.data[0].temperatureLow,
+                dailyHigh: res.data.daily.data[0].temperatureHigh,
+                dewPoint: res.data.currently.dewPoint,
+                precipChance: res.data.currently.precipProbability,
 
-                })
-                console.log(`
-                Current Temp: ${this.state.currentTemp} 
-                Feels Like: ${this.state.feelsLike}
-                Time: ${this.state.currentWeather.currently.time}
-                Summary: ${this.state.currentWeather.currently.summary}
-                Daily Low: ${this.state.dailyLow}
-                Daily High: ${this.state.dailyHigh}
-                Dew Point: ${this.state.dewPoint}
-                Precip Chance: ${this.state.precipChance}
+            })
+            console.log(`
+            Current Temp: ${this.state.currentTemp} 
+            Feels Like: ${this.state.feelsLike}
+            Time: ${this.state.currentWeather.currently.time}
+            Summary: ${this.state.currentWeather.currently.summary}
+            Daily Low: ${this.state.dailyLow}
+            Daily High: ${this.state.dailyHigh}
+            Dew Point: ${this.state.dewPoint}
+            Precip Chance: ${this.state.precipChance}
 
-                `)
-                console.log(this.state.currentWeather);
+            `)
+            console.log(this.state.currentWeather);
+        })
 
             })
             .catch(error => console.log(error));
 
-    }; //closes handleFormSubmit
+    };  //closes handleFormSubmit
 
 
     sliceHourlyArray = array => {
@@ -86,6 +110,27 @@ class WeatherApp extends Component {
 
 
     componentWillMount() {
+        GeoCodeAPI.search(
+            this.state.address,
+            console.log(`
+            address = ${this.state.address}
+            `)
+        )
+        .then(res => {
+            this.setState({
+                geoCode: res.data,
+                latitude: res.data.results[0].geometry.location.lat,
+                longitude: res.data.results[0].geometry.location.lng,
+            })
+            console.log(`address = ${this.state.address}`);
+            console.log(this.state.geoCode);
+            console.log(`
+            latitude = ${this.state.latitude}
+            longitude = ${this.state.longitude}
+            `)
+        // })
+        // .catch(error => console.log(error));
+
         API.search(
             this.state.latitude,
             this.state.longitude,
@@ -95,42 +140,38 @@ class WeatherApp extends Component {
             `)
 
         )
-            .then(res => {
-                this.setState({
-                    currentWeather: res.data,
-                    image: res.data.currently.icon,
-                    currentTemp: res.data.currently.temperature,
-                    feelsLike: res.data.currently.apparentTemperature,
-                    dailyWeather: res.data.daily.data,
-                    dailyLow: res.data.daily.data[0].temperatureLow,
-                    dailyHigh: res.data.daily.data[0].temperatureHigh,
-                    hourlyWeather: res.data.hourly.data, 
-                    dewPoint: res.data.currently.dewPoint,
-                    precipChance: res.data.currently.precipProbability,
-                })
-        
-                console.log(`
-                Current Temp: ${this.state.currentTemp} 
-                Feels Like: ${this.state.feelsLike}
-                Time: ${this.state.currentWeather.currently.time}
-                Summary: ${this.state.currentWeather.currently.summary}
-                DailyLow: ${this.state.dailyLow}
-                DailyHigh: ${this.state.dailyHigh}
-                `)
-                console.log(this.state.currentWeather);
-                              
-                Daily Low: ${this.state.dailyLow}
-                Daily High: ${this.state.dailyHigh}
-                Dew Point: ${this.state.dewPoint}
-                Precip Chance: ${this.state.precipChance}
+        .then(res => {
+            this.setState({
+                currentWeather: res.data,
+                image: res.data.currently.icon,
+                currentTemp: res.data.currently.temperature,
+                feelsLike: res.data.currently.apparentTemperature,
+                dailyWeather: res.data.daily.data,
+                hourlyWeather: res.data.hourly.data,
+                dailyLow: res.data.daily.data[0].temperatureLow,
+                dailyHigh: res.data.daily.data[0].temperatureHigh,
+                dewPoint: res.data.currently.dewPoint,
+                precipChance: res.data.currently.precipProbability,
 
-                `)
-                console.log(this.state.currentWeather);
+            })
+            console.log(`
+            Current Temp: ${this.state.currentTemp} 
+            Feels Like: ${this.state.feelsLike}
+            Time: ${this.state.currentWeather.currently.time}
+            Summary: ${this.state.currentWeather.currently.summary}
+            Daily Low: ${this.state.dailyLow}
+            Daily High: ${this.state.dailyHigh}
+            Dew Point: ${this.state.dewPoint}
+            Precip Chance: ${this.state.precipChance}
+
+            `)
+            console.log(this.state.currentWeather);
+        })
 
             })
             .catch(error => console.log(error));
 
-    }; //closes handleFormSubmit
+    }; 
 
     render() {
         return (
@@ -145,7 +186,7 @@ class WeatherApp extends Component {
                 />
 
                 <Jumbotron>
-                    <WeatherDisplay
+                    <CurrentWeather
                         image={this.state.image}
                         currentTemp={this.state.currentTemp}
                         feelsLike={this.state.feelsLike}
@@ -170,7 +211,7 @@ class WeatherApp extends Component {
 
 
 
-                  <div id="scrollContainer5">
+                  <div id="scrollContainer">
                 {this.state.dailyWeather.map((daily, i) => (
                     <FiveDayForecast
                         date={daily.time}
@@ -179,30 +220,12 @@ class WeatherApp extends Component {
                         dailyTempHigh= {daily.temperatureMax}
                         dailyTempLow= {daily.temperatureMin}
                         dailyPrecip={daily.precipProbability}
-                        key2={i}
-                    />
-                ))} 
-                </div>
-
-               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
-
-              
-
-                <div id="scrollContainer">
-                {this.state.dailyWeather.map((daily, i) => (
-                    <FiveDayForecast
-                        date={daily.time}
-                        dailySummary={daily.summary}
-                        dailyTemp= {daily.temperature}
-                        dailyPrecip={daily.precipProbability}
                         key={i}
                     />
                 ))} 
                 </div>
-               
 
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
-                                                                         
 
                 <Footer />
             </div>

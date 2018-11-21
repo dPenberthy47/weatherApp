@@ -1,4 +1,5 @@
 node_modules
 client/node_modules
-client/src/utils/API
-client/src/utils/GeoCodeAPI
+client/src/utils
+
+

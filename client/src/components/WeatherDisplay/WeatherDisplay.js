@@ -2,25 +2,20 @@ import React from "react";
 import "./WeatherDisplay.css";
 
 const WeatherDisplay = props => (  
-  <div
+  <b><div
     style={{ height: 300, clear: "both", paddingTop: 5, textAlign: "center" }}
     className="WeatherDisplay"
   >
-    {/* <img alt={props.name} src={props.image} /> */}
+      <h1 className="currentTemp">{props.currentTemp}°</h1>
     <div>
-      <h3 className="currentTemp">{props.currentTemp}°</h3>
+      <h3 className="feelsLike"><b>Feels Like: </b>{props.feelsLike}°</h3>
     </div>
-    <div>
-      <h6 className="feelsLike">{props.feelsLike}°</h6>
-    </div>
-    <div>
-      <h6 className="dailyLow">{props.dailyLow}°</h6>
-    </div>
-    <div>
-      <h6 className="dailyHigh">{props.dailyHigh}°</h6>
+    <div id="currentRange">
+      <h6 className="dailyLow"><b>Low: </b>{props.dailyLow}°</h6>
+      <h6 className="dailyHigh"><b>High: </b>{props.dailyHigh}°</h6>
     </div>
 
-  </div>
+  </div></b>
   
 );
 

@@ -1,9 +1,10 @@
+
+
 #scrollContainer {
     border-top: solid 1px rgba(70, 130, 180, 0.3);
     padding-top: 20px;
-
     border-bottom: 1px solid rgba(70, 130, 180, 0.3);
-    margin-bottom: 50px;
+    padding-bottom: 25px;
     
     overflow-y: hidden;
     white-space: nowrap;
@@ -31,4 +32,16 @@ h4 {
 
 p {
     font-size: 12px;
+}
+
+#snow #scrollContainer {
+    background-color: rgba(211,211,211, 0.6);
+}
+
+#rain #scrollContainer {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#fog #scrollContainer {
+    background-color: rgba(211,211,211, 0.6);
 }

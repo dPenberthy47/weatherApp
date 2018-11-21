@@ -1,7 +1,5 @@
 import React from "react";
 import "./HourlyForecast.css";
-
-
 import moment from 'moment';
 
 
@@ -11,21 +9,26 @@ const HourlyForecast = props => {
    return (
 
     <div className="hourlyForecast">
+    <b>
       <h3>
         <canvas className={props.hourlyIcon} width="75" height="75"></canvas>
       </h3>
-
+    </b>
+    <b>
       <h3>
         {moment(props.hourlyTime * 1000).format('LT')}
       </h3>
-  
-      <h4> Temp:
+    </b>
+    <b>
+      <h4> Temp: 
         {props.hourlyTemp}
       </h4>
-      
-      <h4>Precipitation:
+    </b>
+    <b>  
+      <h4>Precipitation: 
         {props.hourlyPrecip}
       </h4>
+    </b>
     </div>
 );
   }

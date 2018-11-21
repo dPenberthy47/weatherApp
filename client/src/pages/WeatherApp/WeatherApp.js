@@ -13,11 +13,10 @@ import Footer from "../../components/Footer";
 
 // var moment = require("moment");
 
-
 class WeatherApp extends Component {
     state = {
-        latitude: "32.7767",
-        longitude: "-96.7970",
+        latitude: 32.7767,
+        longitude: -96.7970,
         image: "",
         currentTemp: "",
         feelsLike: "",
@@ -28,7 +27,42 @@ class WeatherApp extends Component {
         currentWeather: [],
         dailyWeather: [],
         hourlyWeather: [],
+        backgroundImage: ""
     };
+
+    setBackgroundImage() {
+
+        if (this.state.image === "clear-day") {
+         this.setState({backgroundImage: "background-image: url('../../img/clear-day.jpg')"});
+        } 
+        else if (this.state.image === "clear-night") {
+         this.setState({backgroundImage: "background-image: url('../../img/clear-night.jpg')"});
+         }
+        else if (this.state.image === "rain") {
+         this.setState({backgroundImage: "background-image: url('../../img/rainy.jpg')"});
+         }
+        else if (this.state.image === "snow") {
+         this.setState({backgroundImage: "background-image: url('../../img/snowy.jpg')"});
+        }
+        else if (this.state.image === "sleet") {
+         this.setState({backgroundImage: "background-image: url('../../img/snowy.jpg')"});
+        }
+        else if (this.state.image === "wind") {
+         this.setState({backgroundImage: "background-image: url('../../img/windy.jpg')"});
+        }
+        else if (this.state.image === "fog") {
+         this.setState({backgroundImage: "background-image: url('../../img/foggy.jpg')"});
+        }
+        else if (this.state.image === "cloudy") {
+         this.setState({backgroundImage: "background-image: url('../../img/cloudy-day.jpg')"});
+        }
+        else if (this.state.image === "partly-cloudy-day") {
+         this.setState({backgroundImage: "background-image: url('../../img/cloudy-day.jpg')"});
+        }
+        else if (this.state.image === "partly-cloudy-night") {
+         this.setState({backgroundImage: "background-image: url('../../img/cloudy-night.jpg')"});
+        }
+     };
 
     handleInputChange = event => {
         const value = event.target.value;
@@ -60,8 +94,7 @@ class WeatherApp extends Component {
                     dailyLow: res.data.daily.data[0].temperatureLow,
                     dailyHigh: res.data.daily.data[0].temperatureHigh,
                     dewPoint: res.data.currently.dewPoint,
-                    precipChance: res.data.currently.precipProbability,
-
+                    precipChance: res.data.currently.precipProbability
                 })
                 console.log(`
                 Current Temp: ${this.state.currentTemp} 
@@ -81,13 +114,7 @@ class WeatherApp extends Component {
 
     }; //closes handleFormSubmit
 
-
-    sliceHourlyArray = array => {
-        //need to .map through the api parameters
-    }
-
-
-
+    
     componentWillMount() {
         API.search(
             this.state.latitude,
@@ -107,52 +134,76 @@ class WeatherApp extends Component {
                     dailyLow: res.data.daily.data[0].temperatureLow,
                     dailyHigh: res.data.daily.data[0].temperatureHigh, 
                     dailyWeather: res.data.daily.data,         
-                    hourlyWeather: res.data.hourly.data
+                    hourlyWeather: res.data.hourly.data,
+                    backgroundImage: ""
                 })
+
+                if (this.state.image === "clear-day") {
+                    this.setState({backgroundImage: 'clear-day'});
+                   } 
+                   else if (this.state.image === 'clear-night') {
+                    this.setState({backgroundImage: 'clear-night'});
+                    }
+                   else if (this.state.image === "rain") {
+                    this.setState({backgroundImage: 'rain'});
+                    }
+                   else if (this.state.image === "snow") {
+                    this.setState({backgroundImage: 'snow'});
+                   }
+                   else if (this.state.image === "sleet") {
+                    this.setState({backgroundImage: 'snow'});
+                   }
+                   else if (this.state.image === "wind") {
+                    this.setState({backgroundImage: 'wind'});
+                   }
+                   else if (this.state.image === "fog") {
+                    this.setState({backgroundImage: 'fog'});
+                   }
+                   else if (this.state.image === "cloudy") {
+                    this.setState({backgroundImage: 'cloudy-day'});
+                   }
+                   else if (this.state.image === "partly-cloudy-day") {
+                    this.setState({backgroundImage: 'cloudy-day'});
+                   }
+                   else if (this.state.image === "partly-cloudy-night") {
+                    this.setState({backgroundImage: 'cloudy-night'});
+                   }
         
                 console.log(`
+                image: ${this.state.image}
                 Current Temp: ${this.state.currentTemp} 
                 Feels Like: ${this.state.feelsLike}
                 Time: ${this.state.currentWeather.currently.time}
                 Summary: ${this.state.currentWeather.currently.summary}
                 DailyLow: ${this.state.dailyLow}
                 DailyHigh: ${this.state.dailyHigh}
+                backgroundImage: ${this.state.backgroundImage}
                 `)
                 console.log(this.state.currentWeather);
- 
-
-               
-                
-
-
             })
             .catch(error => console.log(error));
     };
 
     render() {
         return (
-            <div>
+            <div id={this.state.backgroundImage}>
                 <Navbar />
-                
                 <LocationSearch
                     value={this.state.search}
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
                 />
 
-                <Jumbotron>
-                    <WeatherDisplay
-                        image={this.state.image}
-                        currentTemp={this.state.currentTemp}
-                        feelsLike={this.state.feelsLike}
-                        dailyLow={this.state.dailyLow}
-                        dailyHigh={this.state.dailyHigh}
-                    />
-
-                </Jumbotron>
+                <WeatherDisplay
+                    image={this.state.image}
+                    currentTemp={this.state.currentTemp}
+                    feelsLike={this.state.feelsLike}
+                    dailyLow={this.state.dailyLow}
+                    dailyHigh={this.state.dailyHigh}
+                />
 
                 <div id="scrollContainer">
-                {this.state.hourlyWeather.map((hourly, i) => (
+                {(this.state.hourlyWeather.slice(1, 25)).map((hourly, i) => (
                     <HourlyForecast
                         hourlyIcon={hourly.icon}
                         hourlyTime={hourly.time}
@@ -163,9 +214,8 @@ class WeatherApp extends Component {
                 ))}
                 </div>
 
-
-                  <div id="scrollContainer5">
-                {this.state.dailyWeather.map((daily, i) => (
+                <div id="scrollContainer5">
+                {(this.state.dailyWeather.slice(0,5)).map((daily, i) => (
                     <FiveDayForecast
                         date={daily.time}
                         dailyIcon={daily.icon}
@@ -178,10 +228,7 @@ class WeatherApp extends Component {
                 ))} 
                 </div>
 
-               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
-
-              
-
+                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
                 <Footer />
             </div>
         )

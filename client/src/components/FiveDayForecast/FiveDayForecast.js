@@ -3,37 +3,31 @@ import "./FiveDayForecast.css";
 import moment from "moment";
 
 const FiveDayForecast = props => {
-    return (
-  
-      <div className="fiveDayForecast">
-        <h3>
-          <canvas className={props.dailyIcon} width="75" height="75"></canvas>
+  return (
+    <div className="fiveDayForecast">
+      <h3>
+        <canvas className={props.dailyIcon} width="75" height="75"></canvas>
         </h3>
-  
-  <h3>
-       {moment(props.date * 1000).format("MM/DD")}
 
-       </h3>
-        
+      <h3>
+        {moment(props.date * 1000).format("dddd")} - {moment(props.date * 1000).format("MM/DD")}
+        </h3>
+
         <h3>
-
           {props.dailySummary}
-        </h3>
+          </h3>
     
-        <h4> High:
-          {Math.round(props.dailyTempHigh)}°
+      <h4>
+        High: {Math.round(props.dailyTempHigh)}°
+        </h4>
+      
+      <h4>
+        Low: {Math.round(props.dailyTempLow)}°
         </h4>
         
-        <h4> Low:
-          {Math.round(props.dailyTempLow)}°
+      <h4>
+        Precip: {Math.round(props.dailyPrecip * 100)}%
         </h4>
-        
-        <h4>Chance of Rain:
-          {/* {props.dailyPrecip} */}
-          {Math.round(props.dailyPrecip * 100)}%
-          
-        </h4>
-
 
       </div>
   );

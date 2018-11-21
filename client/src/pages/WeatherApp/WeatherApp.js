@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import GeoCodeAPI from "../../utils/GeoCodeAPI";
 import Navbar from "../../components/Navbar";
-import LocationSearch from "../../components/LocationSearch";
+// import LocationSearch from "../../components/LocationSearch";
 import Jumbotron from "../../components/Jumbotron";
+import WeatherIcons from "../../components/WeatherIcons";
 import CurrentWeather from "../../components/CurrentWeather";
 import HourlyForecast from "../../components/HourlyForecast";
 import DarkskyMap from 'react-darksky-map';
@@ -14,7 +15,7 @@ import Footer from "../../components/Footer";
 class WeatherApp extends Component {
     state = {
         geoCode: [] ,
-        address: "1600+Amphitheatre+Parkway,+Mountain+View,+CA",
+        address: "dallas,tx",
         latitude: "",
         longitude: "",
         image: "",
@@ -177,15 +178,19 @@ class WeatherApp extends Component {
         return (
             <div>
 
-                <Navbar />
+                <Navbar
+                  value={this.state.search}
+                  handleInputChange={this.handleInputChange}
+                  handleFormSubmit={this.handleFormSubmit} />
                 
-                <LocationSearch
+                {/* <LocationSearch
                     value={this.state.search}
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
-                />
+                /> */}
 
                 <Jumbotron>
+                    <WeatherIcons />
                     <CurrentWeather
                         image={this.state.image}
                         currentTemp={this.state.currentTemp}

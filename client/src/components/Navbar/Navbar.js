@@ -15,9 +15,31 @@ const Navbar = props => {
         </ul>
         <form>
           <div className="input-field">
-            <input id="search" type="search" required />
-            <label className="label-icon" placeholder="City Search" htmlFor="search" ><i className="material-icons">search</i></label>
-            <i className="material-icons">close</i>
+            <input
+              id="search"
+              type="search"
+              onChange={props.handleInputChange}
+              value={props.value}
+              name="address"
+            />
+            <label
+              onChange={props.handleInputChange}
+              value={props.value}
+              name="address"
+              className="label-icon"
+              placeholder="City Search"
+            // htmlFor="search"
+            >
+              <button
+                onClick={props.handleFormSubmit}
+                className="btn btn-primary"
+              >
+              + </button>
+              {/* <i className="material-icons">search</i> */}
+              {/* </button> */}
+              </label>
+              
+            {/* <i className="material-icons">close</i> */}
           </div>
         </form>
       </div>

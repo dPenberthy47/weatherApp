@@ -31,6 +31,7 @@
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react-darksky-map": "^0.1.0",
+    "react-icons-weather": "^1.0.5",
     "react-moment": "^0.8.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import GeoCodeAPI from "../../utils/GeoCodeAPI";
 import Navbar from "../../components/Navbar";
-// import LocationSearch from "../../components/LocationSearch";
+// import WeatherAlert from "../../components/WeatherAlert";
 import Jumbotron from "../../components/Jumbotron";
 import WeatherIcons from "../../components/WeatherIcons";
 import CurrentWeather from "../../components/CurrentWeather";
@@ -14,7 +14,7 @@ import Footer from "../../components/Footer";
 
 class WeatherApp extends Component {
     state = {
-        geoCode: [] ,
+        geoCode: [],
         address: "dallas,tx",
         latitude: "",
         longitude: "",
@@ -32,38 +32,52 @@ class WeatherApp extends Component {
     };
 
     setBackgroundImage() {
-
         if (this.state.image === "clear-day") {
-         this.setState({backgroundImage: "background-image: url('../../img/clear-day.jpg')"});
-        } 
-        else if (this.state.image === "clear-night") {
-         this.setState({backgroundImage: "background-image: url('../../img/clear-night.jpg')"});
-         }
-        else if (this.state.image === "rain") {
-         this.setState({backgroundImage: "background-image: url('../../img/rainy.jpg')"});
-         }
-        else if (this.state.image === "snow") {
-         this.setState({backgroundImage: "background-image: url('../../img/snowy.jpg')"});
+            this.setState({ backgroundImage: "background-image: url('../../img/clear-day.jpg')" });
+        } else if (this.state.image === "clear-night") {
+            this.setState({ backgroundImage: "background-image: url('../../img/clear-night.jpg')" });
+        } else if (this.state.image === "rain") {
+            this.setState({ backgroundImage: "background-image: url('../../img/rainy.jpg')" });
+        } else if (this.state.image === "snow") {
+            this.setState({ backgroundImage: "background-image: url('../../img/snowy.jpg')" });
+        } else if (this.state.image === "sleet") {
+            this.setState({ backgroundImage: "background-image: url('../../img/snowy.jpg')" });
+        } else if (this.state.image === "wind") {
+            this.setState({ backgroundImage: "background-image: url('../../img/windy.jpg')" });
+        } else if (this.state.image === "fog") {
+            this.setState({ backgroundImage: "background-image: url('../../img/foggy.jpg')" });
+        } else if (this.state.image === "cloudy") {
+            this.setState({ backgroundImage: "background-image: url('../../img/cloudy-day.jpg')" });
+        } else if (this.state.image === "partly-cloudy-day") {
+            this.setState({ backgroundImage: "background-image: url('../../img/cloudy-day.jpg')" });
+        } else if (this.state.image === "partly-cloudy-night") {
+            this.setState({ backgroundImage: "background-image: url('../../img/cloudy-night.jpg')" });
         }
-        else if (this.state.image === "sleet") {
-         this.setState({backgroundImage: "background-image: url('../../img/snowy.jpg')"});
+    };
+
+    setBackgroundImageTest() {
+        if (this.state.image === "clear-day") {
+            this.setState({ backgroundImage: 'clear-day' });
+        } else if (this.state.image === 'clear-night') {
+            this.setState({ backgroundImage: 'clear-night' });
+        } else if (this.state.image === "rain") {
+            this.setState({ backgroundImage: 'rain' });
+        } else if (this.state.image === "snow") {
+            this.setState({ backgroundImage: 'snow' });
+        } else if (this.state.image === "sleet") {
+            this.setState({ backgroundImage: 'snow' });
+        } else if (this.state.image === "wind") {
+            this.setState({ backgroundImage: 'wind' });
+        } else if (this.state.image === "fog") {
+            this.setState({ backgroundImage: 'fog' });
+        } else if (this.state.image === "cloudy") {
+            this.setState({ backgroundImage: 'cloudy-day' });
+        } else if (this.state.image === "partly-cloudy-day") {
+            this.setState({ backgroundImage: 'cloudy-day' });
+        } else if (this.state.image === "partly-cloudy-night") {
+            this.setState({ backgroundImage: 'cloudy-night' });
         }
-        else if (this.state.image === "wind") {
-         this.setState({backgroundImage: "background-image: url('../../img/windy.jpg')"});
-        }
-        else if (this.state.image === "fog") {
-         this.setState({backgroundImage: "background-image: url('../../img/foggy.jpg')"});
-        }
-        else if (this.state.image === "cloudy") {
-         this.setState({backgroundImage: "background-image: url('../../img/cloudy-day.jpg')"});
-        }
-        else if (this.state.image === "partly-cloudy-day") {
-         this.setState({backgroundImage: "background-image: url('../../img/cloudy-day.jpg')"});
-        }
-        else if (this.state.image === "partly-cloudy-night") {
-         this.setState({backgroundImage: "background-image: url('../../img/cloudy-night.jpg')"});
-        }
-     };
+    };
 
     handleInputChange = event => {
         const value = event.target.value;
@@ -77,74 +91,60 @@ class WeatherApp extends Component {
         event.preventDefault();
         GeoCodeAPI.search(
             this.state.address,
-            console.log(`
-            address = ${this.state.address}
-            `)
+            console.log(`address = ${this.state.address}`)
         )
-        .then(res => {
-            this.setState({
-                geoCode: res.data,
-                latitude: res.data.results[0].geometry.location.lat,
-                longitude: res.data.results[0].geometry.location.lng,
-            })
-            console.log(`address = ${this.state.address}`);
-            console.log(this.state.geoCode);
-            console.log(`
-            latitude = ${this.state.latitude}
-            longitude = ${this.state.longitude}
-            `)
-        // })
-        // .catch(error => console.log(error));
-
-        API.search(
-            this.state.latitude,
-            this.state.longitude,
-            console.log(`
-            latitude = ${this.state.latitude}
-            longitude = ${this.state.longitude}
-            `)
-
-        )
-        .then(res => {
-            this.setState({
-                currentWeather: res.data,
-                image: res.data.currently.icon,
-                currentTemp: res.data.currently.temperature,
-                feelsLike: res.data.currently.apparentTemperature,
-                dailyWeather: res.data.daily.data,
-                hourlyWeather: res.data.hourly.data,
-                dailyLow: res.data.daily.data[0].temperatureLow,
-                dailyHigh: res.data.daily.data[0].temperatureHigh,
-                dewPoint: res.data.currently.dewPoint,
-                precipChance: res.data.currently.precipProbability,
-
-            })
-            console.log(`
-            Current Temp: ${this.state.currentTemp} 
-            Feels Like: ${this.state.feelsLike}
-            Time: ${this.state.currentWeather.currently.time}
-            Summary: ${this.state.currentWeather.currently.summary}
-            Daily Low: ${this.state.dailyLow}
-            Daily High: ${this.state.dailyHigh}
-            Dew Point: ${this.state.dewPoint}
-            Precip Chance: ${this.state.precipChance}
-
-            `)
-            console.log(this.state.currentWeather);
-            this.setBackgroundImage();
-            console.log(this.state.backgroundImage);
-        })
-
+            .then(res => {
+                this.setState({
+                    geoCode: res.data,
+                    latitude: res.data.results[0].geometry.location.lat,
+                    longitude: res.data.results[0].geometry.location.lng,
+                })
+                console.log(this.state.geoCode);
+                API.search(
+                    this.state.latitude,
+                    this.state.longitude,
+                    console.log(`
+                    latitude = ${this.state.latitude}
+                    longitude = ${this.state.longitude}
+                    `)
+                )
+                    .then(res => {
+                        this.setState({
+                            currentWeather: res.data,
+                            image: res.data.currently.icon,
+                            currentTemp: res.data.currently.temperature,
+                            feelsLike: res.data.currently.apparentTemperature,
+                            dailyWeather: res.data.daily.data,
+                            hourlyWeather: res.data.hourly.data,
+                            dailyLow: res.data.daily.data[0].temperatureLow,
+                            dailyHigh: res.data.daily.data[0].temperatureHigh,
+                            dewPoint: res.data.currently.dewPoint,
+                            precipChance: res.data.currently.precipProbability,
+                        })
+                        this.setBackgroundImage();
+                        // this.setBackgroundImageTest();
+                        console.log(this.state.currentWeather);
+                        console.log(`
+                        Current Temp: ${this.state.currentTemp} 
+                        Feels Like: ${this.state.feelsLike}
+                        Time: ${this.state.currentWeather.currently.time}
+                        Summary: ${this.state.currentWeather.currently.summary}
+                        Daily Low: ${this.state.dailyLow}
+                        Daily High: ${this.state.dailyHigh}
+                        Dew Point: ${this.state.dewPoint}
+                        Precip Chance: ${this.state.precipChance}
+                        Image: ${this.state.image}
+                        background-image: ${this.state.backgroundImage}
+                        `)
+                    })
             })
             .catch(error => console.log(error));
-
     };  //closes handleFormSubmit
 
 
     sliceHourlyArray = array => {
         //need to .map through the api parameters
     }
-
 
 
     componentWillMount() {
@@ -154,79 +154,64 @@ class WeatherApp extends Component {
             address = ${this.state.address}
             `)
         )
-        .then(res => {
-            this.setState({
-                geoCode: res.data,
-                latitude: res.data.results[0].geometry.location.lat,
-                longitude: res.data.results[0].geometry.location.lng,
-            })
-            console.log(`address = ${this.state.address}`);
-            console.log(this.state.geoCode);
-            console.log(`
-            latitude = ${this.state.latitude}
-            longitude = ${this.state.longitude}
-            `)
-        // })
-        // .catch(error => console.log(error));
-
-        API.search(
-            this.state.latitude,
-            this.state.longitude,
-            console.log(`
-            latitude = ${this.state.latitude}
-            longitude = ${this.state.longitude}
-            `)
-
-        )
-        .then(res => {
-            this.setState({
-                currentWeather: res.data,
-                image: res.data.currently.icon,
-                currentTemp: res.data.currently.temperature,
-                feelsLike: res.data.currently.apparentTemperature,
-                dailyWeather: res.data.daily.data,
-                hourlyWeather: res.data.hourly.data,
-                dailyLow: res.data.daily.data[0].temperatureLow,
-                dailyHigh: res.data.daily.data[0].temperatureHigh,
-                dewPoint: res.data.currently.dewPoint,
-                precipChance: res.data.currently.precipProbability,
-
-            })
-            console.log(`
-            Current Temp: ${this.state.currentTemp} 
-            Feels Like: ${this.state.feelsLike}
-            Time: ${this.state.currentWeather.currently.time}
-            Summary: ${this.state.currentWeather.currently.summary}
-            Daily Low: ${this.state.dailyLow}
-            Daily High: ${this.state.dailyHigh}
-            Dew Point: ${this.state.dewPoint}
-            Precip Chance: ${this.state.precipChance}
-
-            `)
-            console.log(this.state.currentWeather);
-            this.setBackgroundImage();
-            console.log(this.state.backgroundImage);
-        })
-
+            .then(res => {
+                this.setState({
+                    geoCode: res.data,
+                    latitude: res.data.results[0].geometry.location.lat,
+                    longitude: res.data.results[0].geometry.location.lng,
+                })
+                console.log(`address = ${this.state.address}`);
+                console.log(this.state.geoCode);
+                API.search(
+                    this.state.latitude,
+                    this.state.longitude,
+                    console.log(`
+                    latitude = ${this.state.latitude}
+                    longitude = ${this.state.longitude}
+                    `)
+                )
+                    .then(res => {
+                        this.setState({
+                            currentWeather: res.data,
+                            image: res.data.currently.icon,
+                            currentTemp: res.data.currently.temperature,
+                            feelsLike: res.data.currently.apparentTemperature,
+                            dailyWeather: res.data.daily.data,
+                            hourlyWeather: res.data.hourly.data,
+                            dailyLow: res.data.daily.data[0].temperatureLow,
+                            dailyHigh: res.data.daily.data[0].temperatureHigh,
+                            dewPoint: res.data.currently.dewPoint,
+                            precipChance: res.data.currently.precipProbability,
+                        })
+                        this.setBackgroundImage();
+                        // this.setBackgroundImageTest();
+                        console.log(this.state.currentWeather);
+                        console.log(`
+                        Current Temp: ${this.state.currentTemp} 
+                        Feels Like: ${this.state.feelsLike}
+                        Time: ${this.state.currentWeather.currently.time}
+                        Summary: ${this.state.currentWeather.currently.summary}
+                        Daily Low: ${this.state.dailyLow}
+                        Daily High: ${this.state.dailyHigh}
+                        Dew Point: ${this.state.dewPoint}
+                        Precip Chance: ${this.state.precipChance}
+                        Image: ${this.state.image}
+                        background-image: ${this.state.backgroundImage}
+                        `)
+                    })
             })
             .catch(error => console.log(error));
-
-    }; 
+    };
 
     render() {
         return (
             <div>
-
                 <Navbar
-                  value={this.state.search}
-                  handleInputChange={this.handleInputChange}
-                  handleFormSubmit={this.handleFormSubmit} />
-                
-                {/* <LocationSearch
                     value={this.state.search}
                     handleInputChange={this.handleInputChange}
-                    handleFormSubmit={this.handleFormSubmit}
-                /> */}
+                    handleFormSubmit={this.handleFormSubmit} />
+
+                {/* <WeatherAlert /> */}
 
                 <Jumbotron>
                     <WeatherIcons />
@@ -237,44 +222,45 @@ class WeatherApp extends Component {
                         dailyLow={this.state.dailyLow}
                         dailyHigh={this.state.dailyHigh}
                     />
-
                 </Jumbotron>
 
                 <div id="scrollContainer">
-                {this.state.hourlyWeather.map((hourly, i) => (
-                    <HourlyForecast
-                    
-                        hourlyIcon={hourly.icon}
-                        hourlyTime={hourly.time}
-                        hourlyTemp= {hourly.temperature}
-                        hourlyPrecip={hourly.precipProbability}
-                        key={i}
-                    />
-                ))}
+                    {this.state.hourlyWeather.map((hourly, i) => (
+                        <HourlyForecast
+
+                            hourlyIcon={hourly.icon}
+                            hourlyTime={hourly.time}
+                            hourlyTemp={hourly.temperature}
+                            hourlyPrecip={hourly.precipProbability}
+                            key={i}
+                        />
+                    ))}
                 </div>
 
-
-
-                  <div id="scrollContainer">
-                {this.state.dailyWeather.map((daily, i) => (
-                    <FiveDayForecast
-                        date={daily.time}
-                        dailyIcon={daily.icon}
-                        dailySummary={daily.summary}
-                        dailyTempHigh= {daily.temperatureMax}
-                        dailyTempLow= {daily.temperatureMin}
-                        dailyPrecip={daily.precipProbability}
-                        key={i}
-                    />
-                ))} 
+                <div id="scrollContainer">
+                    {this.state.dailyWeather.map((daily, i) => (
+                        <FiveDayForecast
+                            date={daily.time}
+                            dailyIcon={daily.icon}
+                            dailySummary={daily.summary}
+                            dailyTempHigh={daily.temperatureMax}
+                            dailyTempLow={daily.temperatureMin}
+                            dailyPrecip={daily.precipProbability}
+                            key={i}
+                        />
+                    ))}
                 </div>
 
-               <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
+                <DarkskyMap
+                    lat={this.state.latitude}
+                    lng={this.state.longitude}
+                    zoom={8}
+                    mapField="temp"
+                />
 
                 <Footer />
             </div>
         )
     }
-
 }
 export default WeatherApp;

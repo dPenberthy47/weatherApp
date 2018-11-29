@@ -28,7 +28,42 @@ class WeatherApp extends Component {
         currentWeather: [],
         dailyWeather: [],
         hourlyWeather: [],
+        backgroundImage: ""
     };
+
+    setBackgroundImage() {
+
+        if (this.state.image === "clear-day") {
+         this.setState({backgroundImage: "background-image: url('../../img/clear-day.jpg')"});
+        } 
+        else if (this.state.image === "clear-night") {
+         this.setState({backgroundImage: "background-image: url('../../img/clear-night.jpg')"});
+         }
+        else if (this.state.image === "rain") {
+         this.setState({backgroundImage: "background-image: url('../../img/rainy.jpg')"});
+         }
+        else if (this.state.image === "snow") {
+         this.setState({backgroundImage: "background-image: url('../../img/snowy.jpg')"});
+        }
+        else if (this.state.image === "sleet") {
+         this.setState({backgroundImage: "background-image: url('../../img/snowy.jpg')"});
+        }
+        else if (this.state.image === "wind") {
+         this.setState({backgroundImage: "background-image: url('../../img/windy.jpg')"});
+        }
+        else if (this.state.image === "fog") {
+         this.setState({backgroundImage: "background-image: url('../../img/foggy.jpg')"});
+        }
+        else if (this.state.image === "cloudy") {
+         this.setState({backgroundImage: "background-image: url('../../img/cloudy-day.jpg')"});
+        }
+        else if (this.state.image === "partly-cloudy-day") {
+         this.setState({backgroundImage: "background-image: url('../../img/cloudy-day.jpg')"});
+        }
+        else if (this.state.image === "partly-cloudy-night") {
+         this.setState({backgroundImage: "background-image: url('../../img/cloudy-night.jpg')"});
+        }
+     };
 
     handleInputChange = event => {
         const value = event.target.value;
@@ -96,6 +131,8 @@ class WeatherApp extends Component {
 
             `)
             console.log(this.state.currentWeather);
+            this.setBackgroundImage();
+            console.log(this.state.backgroundImage);
         })
 
             })
@@ -167,6 +204,8 @@ class WeatherApp extends Component {
 
             `)
             console.log(this.state.currentWeather);
+            this.setBackgroundImage();
+            console.log(this.state.backgroundImage);
         })
 
             })

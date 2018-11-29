@@ -45,7 +45,6 @@ p {
     padding-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(70, 130, 180, 0.3);
- 
     overflow-y: hidden;
     white-space: nowrap;
  }
@@ -86,22 +85,22 @@ p {
     font-size: 12px;
  }
  
- #snow #scrollContainer5 {
+ .snow #scrollContainer5 {
     background-color: rgba(211, 211, 211, 0.8);
  }
  
- #rain #scrollContainer5 {
+ .rain #scrollContainer5 {
     background-color: rgba(0, 0, 0, 0.1);
  }
  
- #fog #scrollContainer5 {
+ .fog #scrollContainer5 {
     background-color: rgba(211, 211, 211, 0.9);
  }
  
- #cloudy-night #scrollContainer5 {
+ .cloudy-night #scrollContainer5 {
     background-color: rgba( 20, 20, 20, 0.2);
  }
  
- #clear-day #scrollContainer5 {
+ .clear-day #scrollContainer5 {
     background-color: rgba(255, 255, 255, 0.7);
  }

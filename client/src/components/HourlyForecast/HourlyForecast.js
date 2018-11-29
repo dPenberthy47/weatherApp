@@ -5,9 +5,9 @@ import moment from "moment";
 const HourlyForecast = props => {
    return (
     <div className="hourlyForecast">
-      <h3>
+      {/* <h3>
         <canvas className={props.hourlyIcon} width="75" height="75"></canvas>
-      </h3>
+      </h3> */}
 
       <h3>
          {moment(props.hourlyTime * 1000).format("h:mm A")}

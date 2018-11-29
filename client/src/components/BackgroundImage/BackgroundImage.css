@@ -1,26 +1,4 @@
-h1 h2 h3 h4 h5 h6 p {
-    font-family: 'Exo 2', sans-serif;
- }
-
- /* h1.currentTemp {
-    
-     float: left;
-    
- } */
- 
- /* .feelsLike {
-     clear: both;
- } */
- 
- #currentRange h6 {
-    display: inline-block;
- }
- 
- #currentRange h6:first-of-type {
-    padding-right: 10px;
- }
- 
- .clear-day {
+.clear-day {
     background-image: url('../../img/clear-day.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -64,7 +42,7 @@ h1 h2 h3 h4 h5 h6 p {
     height: 100%;
  }
  
- .fog {
+.fog {
     background-image: url('../../img/foggy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -83,29 +61,8 @@ h1 h2 h3 h4 h5 h6 p {
     background-repeat: no-repeat;
     height: 100%;
  }
-
- .partly-cloudy-day {
-    background-image: url('../../img/cloudy-day.jpg');
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
- }
  
- .cloudy-night {
-    background-image: url('../../img/cloudy-night.jpg');
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    color: yellow;
- }
-
- .partly-cloudy-night {
+ #cloudy-night {
     background-image: url('../../img/cloudy-night.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;

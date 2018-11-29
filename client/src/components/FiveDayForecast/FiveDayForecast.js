@@ -42,10 +42,7 @@ import moment from 'moment';
 
 
 const FiveDayForecast = props => {
-
-
    return (
-
      <div className="fiveDayForecast">
        <h3>
          <canvas className={props.dailyIcon} width="75" height="75"></canvas>

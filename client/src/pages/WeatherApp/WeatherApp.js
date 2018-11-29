@@ -19,6 +19,8 @@ class WeatherApp extends Component {
         latitude: "",
         longitude: "",
         image: "",
+        alert: "",
+        currently: "",
         currentTemp: "",
         feelsLike: "",
         dailyLow: "",
@@ -27,7 +29,9 @@ class WeatherApp extends Component {
         precipChance: "",
         currentWeather: [],
         dailyWeather: [],
+        nextFiveDays: [],
         hourlyWeather: [],
+        nextEighteenHours: [],
         backgroundImage: ""
     };
 
@@ -112,6 +116,7 @@ class WeatherApp extends Component {
                         this.setState({
                             currentWeather: res.data,
                             image: res.data.currently.icon,
+                            currentSummary: res.data.currently.summary,
                             currentTemp: res.data.currently.temperature,
                             feelsLike: res.data.currently.apparentTemperature,
                             dailyWeather: res.data.daily.data,
@@ -124,6 +129,7 @@ class WeatherApp extends Component {
                         this.setBackgroundImage();
                         // this.setBackgroundImageTest();
                         console.log(this.state.currentWeather);
+                        console.log(this.state.hourlyWeather);
                         console.log(`
                         Current Temp: ${this.state.currentTemp} 
                         Feels Like: ${this.state.feelsLike}
@@ -137,14 +143,35 @@ class WeatherApp extends Component {
                         background-image: ${this.state.backgroundImage}
                         `)
                     })
+                    .then(() => {
+                        this.sliceHourlyArray();
+                        this.sliceDailyArray();
+                    })
             })
             .catch(error => console.log(error));
     };  //closes handleFormSubmit
 
 
-    sliceHourlyArray = array => {
-        //need to .map through the api parameters
+    sliceHourlyArray() {
+        this.setState({
+            nextEighteenHours: [],
+        })
+        for (let i = 0; i < 18; i++) {
+            this.state.nextEighteenHours.push(this.state.hourlyWeather[i]);
+        }
+        console.log(this.state.nextEighteenHours);
     }
+
+    sliceDailyArray() {
+        this.setState({
+            nextFiveDays: [],
+        })
+        for(let i = 0; i < 5; i++) {
+            this.state.nextFiveDays.push(this.state.dailyWeather[i]);
+        }
+        console.log(this.state.nextFiveDays);
+    }
+
 
 
     componentWillMount() {
@@ -174,6 +201,7 @@ class WeatherApp extends Component {
                         this.setState({
                             currentWeather: res.data,
                             image: res.data.currently.icon,
+                            currentSummary: res.data.currently.summary,
                             currentTemp: res.data.currently.temperature,
                             feelsLike: res.data.currently.apparentTemperature,
                             dailyWeather: res.data.daily.data,
@@ -199,9 +227,14 @@ class WeatherApp extends Component {
                         background-image: ${this.state.backgroundImage}
                         `)
                     })
+                    .then(() => {
+                        this.sliceHourlyArray();
+                        this.sliceDailyArray();
+                        console.log("slices have run");
+                    })
             })
             .catch(error => console.log(error));
-    };
+        };
 
     render() {
         return (
@@ -217,6 +250,7 @@ class WeatherApp extends Component {
                     <WeatherIcons />
                     <CurrentWeather
                         image={this.state.image}
+                        currentSummary={this.state.currentSummary}
                         currentTemp={this.state.currentTemp}
                         feelsLike={this.state.feelsLike}
                         dailyLow={this.state.dailyLow}
@@ -225,7 +259,7 @@ class WeatherApp extends Component {
                 </Jumbotron>
 
                 <div id="scrollContainer">
-                    {this.state.hourlyWeather.map((hourly, i) => (
+                    {this.state.nextEighteenHours.map((hourly, i) => (
                         <HourlyForecast
 
                             hourlyIcon={hourly.icon}
@@ -238,7 +272,7 @@ class WeatherApp extends Component {
                 </div>
 
                 <div id="scrollContainer">
-                    {this.state.dailyWeather.map((daily, i) => (
+                    {this.state.nextFiveDays.map((daily, i) => (
                         <FiveDayForecast
                             date={daily.time}
                             dailyIcon={daily.icon}

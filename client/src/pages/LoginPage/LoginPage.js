@@ -1,124 +1,111 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Auth from '../modules/Auth';
-import LoginForm from '../components/LoginForm.jsx';
+import React, { Component } from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import routes from './routes.js';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom'
+
+import HomePage from '../../loginComponents/HomePage';
+import LoginPage from '../../loginContainers/LoginPage';
+import LogoutFunction from '../../loginContainers/LogoutFunction';
+import SignUpPage from '../../loginContainers/SignUpPage';
+import DashboardPage from '../../loginContainers/DashboardPage';
+import Auth from '../../modules/Auth';
+import Navbar from '../../components/Navbar';
+import WeatherApp from '../WeatherApp';
+
+// remove tap delay, essential for MaterialUI to work properly
 
 
-class LoginPage extends React.Component {
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    Auth.isUserAuthenticated() ? (
+      <Component {...props} {...rest} />
+    ) : (
+      <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
 
-  /**
-   * Class constructor.
-   */
-  constructor(props, context) {
-    super(props, context);
+const LoggedOutRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    Auth.isUserAuthenticated() ? (
+      <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }}/>
+    ) : (
+      <Component {...props} {...rest} />
+    )
+  )}/>
+)
 
-    const storedMessage = localStorage.getItem('successMessage');
-    let successMessage = '';
+const PropsRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    <Component {...props} {...rest} />
+  )}/>
+)
 
-    if (storedMessage) {
-      successMessage = storedMessage;
-      localStorage.removeItem('successMessage');
-    }
-
-    // set the initial component state
+class Main extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      errors: {},
-      successMessage,
-      user: {
-        email: '',
-        password: ''
-      }
-    };
+      authenticated: false
+    }
+  };
 
-    this.processForm = this.processForm.bind(this);
-    this.changeUser = this.changeUser.bind(this);
+  componentDidMount() {
+    // check if user is logged in on refresh
+    this.toggleAuthenticateStatus()
   }
 
-  /**
-   * Process the form.
-   *
-   * @param {object} event - the JavaScript event object
-   */
-  processForm(event) {
-    // prevent default action. in this case, action is the form submission event
-    event.preventDefault();
-
-    // create a string for an HTTP body message
-    const email = encodeURIComponent(this.state.user.email);
-    const password = encodeURIComponent(this.state.user.password);
-    const formData = `email=${email}&password=${password}`;
-
-    // create an AJAX request
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.status === 200) {
-        // success
-
-        // change the component-container state
-        this.setState({
-          errors: {}
-        });
-
-        // save the token
-        Auth.authenticateUser(xhr.response.token);
-
-        // update authenticated state
-        this.props.toggleAuthenticateStatus()
-
-        // redirect signed in user to dashboard
-        this.props.history.push('/');
-      } else {
-        // failure
-
-        // change the component state
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
-
-        this.setState({
-          errors
-        });
-      }
-    });
-    xhr.send(formData);
+  toggleAuthenticateStatus() {
+    // check authenticated status and toggle state based on that
+    this.setState({ authenticated: Auth.isUserAuthenticated() })
   }
 
-  /**
-   * Change the user object.
-   *
-   * @param {object} event - the JavaScript event object
-   */
-  changeUser(event) {
-    const field = event.target.name;
-    const user = this.state.user;
-    user[field] = event.target.value;
-
-    this.setState({
-      user
-    });
-  }
-
-  /**
-   * Render the component.
-   */
   render() {
     return (
-      <LoginForm
-        onSubmit={this.processForm}
-        onChange={this.changeUser}
-        errors={this.state.errors}
-        successMessage={this.state.successMessage}
-        user={this.state.user}
-      />
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <Router>
+          <div>
+
+            <div className="top-bar">
+              <div className="top-bar-left">
+                <Link to="/">Weather Watch</Link>
+              </div>
+              {this.state.authenticated ? (
+                <div className="top-bar-right">
+                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to="/logout">Log out</Link>
+                </div>
+              ) : (
+                <div className="top-bar-right">
+                  <Link to="/login">Log in</Link>
+                  <Link to="/signup">Sign up</Link>
+                </div>
+              )}
+
+            </div>
+
+            <PropsRoute exact path="/" component={WeatherApp} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+            <PrivateRoute path="/dashboard" component={DashboardPage}/>
+            <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+            <LoggedOutRoute path="/signup" component={SignUpPage}/>
+            <Route path="/logout" component={LogoutFunction}/>
+          </div>
+
+        </Router>
+      </MuiThemeProvider>
     );
   }
-
 }
 
-LoginPage.contextTypes = {
-  router: PropTypes.object.isRequired
-};
-
-export default LoginPage;
+export default Main;

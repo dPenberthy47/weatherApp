@@ -3,32 +3,21 @@ import "./CurrentWeather.css";
 
 const CurrentWeather = props => (  
   <div
-    style={{
-      height: 300,
-      clear: "both",
-      paddingTop: 5, 
-    textAlign: "center" 
-  }}
+    style={{ height: 300, clear: "both", paddingTop: 5, textAlign: "center" }}
     className="CurrentWeather"
   >
+    {/* <img alt={props.name} src={props.image} /> */}
     <div>
-      <p className="weatherIcon"> {props.image} </p>
-      {/* <h5 className="currentSummary">{props.currentSummary}</h5> */}
-    </div>
-    {/* <div>
-      <h5 className="currentSummary">{props.currentSummary}</h5>
-    </div> */}
-    <div>
-      <h1 className="currentTemp">{Math.round(props.currentTemp)}°</h1>
+      <h3 className="currentTemp">{props.currentTemp}°</h3>
     </div>
     <div>
-      <h5 className="feelsLike">Feels Like: {Math.round(props.feelsLike)}°</h5>
+      <h6 className="feelsLike">{props.feelsLike}°</h6>
     </div>
     <div>
-      <h5 className="dailyLow">Low: {Math.round(props.dailyLow)}°</h5>
+      <h6 className="dailyLow">{props.dailyLow}°</h6>
     </div>
     <div>
-      <h5 className="dailyHigh">High: {Math.round(props.dailyHigh)}°</h5>
+      <h6 className="dailyHigh">{props.dailyHigh}°</h6>
     </div>
 
   </div>

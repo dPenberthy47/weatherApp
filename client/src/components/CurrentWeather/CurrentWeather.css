@@ -20,7 +20,7 @@ h1 h2 h3 h4 h5 h6 p {
     padding-right: 10px;
  }
  
- .clear-day {
+ #clear-day {
     background-image: url('../../img/clear-day.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -29,7 +29,7 @@ h1 h2 h3 h4 h5 h6 p {
     background-repeat: no-repeat;
  }
  
- .clear-night {
+ #clear-night {
     background-image: url('../../img/clear-night.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -39,7 +39,7 @@ h1 h2 h3 h4 h5 h6 p {
     color: yellow;
  }
  
- .rain {
+ #rain {
     background-image: url('../../img/rainy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -50,11 +50,11 @@ h1 h2 h3 h4 h5 h6 p {
     color: white;
  }
  
- .rain .WeatherDisplay {
+ #rain .CurrentWeather {
     background-color: rgba(0, 0, 0, 0.1);
  }
  
- .snow {
+ #snow {
     background-image: url('../../img/snowy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -64,7 +64,7 @@ h1 h2 h3 h4 h5 h6 p {
     height: 100%;
  }
  
- .fog {
+ #fog {
     background-image: url('../../img/foggy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -74,7 +74,7 @@ h1 h2 h3 h4 h5 h6 p {
     height: 100%;
  }
  
- .cloudy-day {
+ #cloudy-day {
     background-image: url('../../img/cloudy-day.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -84,7 +84,7 @@ h1 h2 h3 h4 h5 h6 p {
     height: 100%;
  }
 
- .partly-cloudy-day {
+ #partly-cloudy-day {
     background-image: url('../../img/cloudy-day.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -94,7 +94,7 @@ h1 h2 h3 h4 h5 h6 p {
     height: 100%;
  }
  
- .cloudy-night {
+ #cloudy-night {
     background-image: url('../../img/cloudy-night.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -105,7 +105,7 @@ h1 h2 h3 h4 h5 h6 p {
     color: yellow;
  }
 
- .partly-cloudy-night {
+ #partly-cloudy-night {
     background-image: url('../../img/cloudy-night.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;

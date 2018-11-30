@@ -16,8 +16,8 @@ class WeatherApp extends Component {
     state = {
         geoCode: [],
         address: "dallas,tx",
-        latitude: "",
-        longitude: "",
+        latitude: "32.7767",
+        longitude: "-96.7970",
         image: "",
         alert: "",
         currently: "",
@@ -56,30 +56,6 @@ class WeatherApp extends Component {
             this.setState({ backgroundImage: "background-image: url('../../img/cloudy-day.jpg')" });
         } else if (this.state.image === "partly-cloudy-night") {
             this.setState({ backgroundImage: "background-image: url('../../img/cloudy-night.jpg')" });
-        }
-    };
-
-    setBackgroundImageTest() {
-        if (this.state.image === "clear-day") {
-            this.setState({ backgroundImage: 'clear-day' });
-        } else if (this.state.image === 'clear-night') {
-            this.setState({ backgroundImage: 'clear-night' });
-        } else if (this.state.image === "rain") {
-            this.setState({ backgroundImage: 'rain' });
-        } else if (this.state.image === "snow") {
-            this.setState({ backgroundImage: 'snow' });
-        } else if (this.state.image === "sleet") {
-            this.setState({ backgroundImage: 'snow' });
-        } else if (this.state.image === "wind") {
-            this.setState({ backgroundImage: 'wind' });
-        } else if (this.state.image === "fog") {
-            this.setState({ backgroundImage: 'fog' });
-        } else if (this.state.image === "cloudy") {
-            this.setState({ backgroundImage: 'cloudy-day' });
-        } else if (this.state.image === "partly-cloudy-day") {
-            this.setState({ backgroundImage: 'cloudy-day' });
-        } else if (this.state.image === "partly-cloudy-night") {
-            this.setState({ backgroundImage: 'cloudy-night' });
         }
     };
 
@@ -127,7 +103,6 @@ class WeatherApp extends Component {
                             precipChance: res.data.currently.precipProbability,
                         })
                         this.setBackgroundImage();
-                        // this.setBackgroundImageTest();
                         console.log(this.state.currentWeather);
                         console.log(this.state.hourlyWeather);
                         console.log(`
@@ -143,36 +118,9 @@ class WeatherApp extends Component {
                         background-image: ${this.state.backgroundImage}
                         `)
                     })
-                    .then(() => {
-                        this.sliceHourlyArray();
-                        this.sliceDailyArray();
-                    })
             })
             .catch(error => console.log(error));
     };  //closes handleFormSubmit
-
-
-    sliceHourlyArray() {
-        this.setState({
-            nextEighteenHours: [],
-        })
-        for (let i = 0; i < 18; i++) {
-            this.state.nextEighteenHours.push(this.state.hourlyWeather[i]);
-        }
-        console.log(this.state.nextEighteenHours);
-    }
-
-    sliceDailyArray() {
-        this.setState({
-            nextFiveDays: [],
-        })
-        for(let i = 0; i < 5; i++) {
-            this.state.nextFiveDays.push(this.state.dailyWeather[i]);
-        }
-        console.log(this.state.nextFiveDays);
-    }
-
-
 
     componentWillMount() {
         GeoCodeAPI.search(
@@ -212,7 +160,6 @@ class WeatherApp extends Component {
                             precipChance: res.data.currently.precipProbability,
                         })
                         this.setBackgroundImage();
-                        // this.setBackgroundImageTest();
                         console.log(this.state.currentWeather);
                         console.log(`
                         Current Temp: ${this.state.currentTemp} 
@@ -227,26 +174,22 @@ class WeatherApp extends Component {
                         background-image: ${this.state.backgroundImage}
                         `)
                     })
-                    .then(() => {
-                        this.sliceHourlyArray();
-                        this.sliceDailyArray();
-                        console.log("slices have run");
-                    })
             })
             .catch(error => console.log(error));
-        };
+    };
 
     render() {
         return (
             <div>
-                <Navbar
-                    value={this.state.search}
-                    handleInputChange={this.handleInputChange}
-                    handleFormSubmit={this.handleFormSubmit} />
+                <div id={this.state.image} >
+                    <Navbar
+                        value={this.state.search}
+                        handleInputChange={this.handleInputChange}
+                        handleFormSubmit={this.handleFormSubmit} />
 
-                {/* <WeatherAlert /> */}
+                    {/* <WeatherAlert /> */}
 
-                <Jumbotron>
+                    {/* <Jumbotron> */}
                     <WeatherIcons />
                     <CurrentWeather
                         image={this.state.image}
@@ -256,35 +199,34 @@ class WeatherApp extends Component {
                         dailyLow={this.state.dailyLow}
                         dailyHigh={this.state.dailyHigh}
                     />
-                </Jumbotron>
+                    {/* </Jumbotron> */}
 
-                <div id="scrollContainer">
-                    {this.state.nextEighteenHours.map((hourly, i) => (
-                        <HourlyForecast
+                    <div id="scrollContainer">
+                        {(this.state.hourlyWeather.slice(1, 19)).map((hourly, i) => (
+                            <HourlyForecast
+                                hourlyIcon={hourly.icon}
+                                hourlyTime={hourly.time}
+                                hourlyTemp={hourly.temperature}
+                                hourlyPrecip={hourly.precipProbability}
+                                key={i}
+                            />
+                        ))}
+                    </div>
 
-                            hourlyIcon={hourly.icon}
-                            hourlyTime={hourly.time}
-                            hourlyTemp={hourly.temperature}
-                            hourlyPrecip={hourly.precipProbability}
-                            key={i}
-                        />
-                    ))}
+                    <div id="scrollContainer">
+                        {(this.state.dailyWeather.slice(1, 6)).map((daily, i) => (
+                            <FiveDayForecast
+                                date={daily.time}
+                                dailyIcon={daily.icon}
+                                dailySummary={daily.summary}
+                                dailyTempHigh={daily.temperatureMax}
+                                dailyTempLow={daily.temperatureMin}
+                                dailyPrecip={daily.precipProbability}
+                                key={i}
+                            />
+                        ))}
+                    </div>
                 </div>
-
-                <div id="scrollContainer">
-                    {this.state.nextFiveDays.map((daily, i) => (
-                        <FiveDayForecast
-                            date={daily.time}
-                            dailyIcon={daily.icon}
-                            dailySummary={daily.summary}
-                            dailyTempHigh={daily.temperatureMax}
-                            dailyTempLow={daily.temperatureMin}
-                            dailyPrecip={daily.precipProbability}
-                            key={i}
-                        />
-                    ))}
-                </div>
-
                 <DarkskyMap
                     lat={this.state.latitude}
                     lng={this.state.longitude}

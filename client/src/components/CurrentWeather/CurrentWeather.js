@@ -4,7 +4,7 @@ import "./CurrentWeather.css";
 const CurrentWeather = props => (  
   <div
     style={{ height: 300, clear: "both", paddingTop: 5, textAlign: "center" }}
-    className="WeatherDisplay"
+    className="CurrentWeather"
   >
     {/* <img alt={props.name} src={props.image} /> */}
     <div>

@@ -48,26 +48,9 @@ const FiveDayForecast = props => {
          <canvas className={props.dailyIcon} width="75" height="75"></canvas>
        </h3>
 
-<<<<<<< HEAD
-          {props.dailySummary}
-        </h3>
-    
-        <h4> Temp High:
-          {props.dailyTempHigh}°
-        </h4>
-        
-        <h4> Temp Low:
-          {props.dailyTempLow}°
-        </h4>
-        
-        <h4>Precipitation:
-          {props.dailyPrecip}%
-        </h4>
-=======
        <h3>
        {moment(props.date * 1000).format("dddd")} - {moment(props.date * 1000).format("MM/DD")}
       </h3>
->>>>>>> 5ae57939afde4187e8c5116ebe304fce70498d0f
 
        <h3>
          {props.dailySummary}

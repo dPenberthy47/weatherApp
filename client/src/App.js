@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import WeatherApp from "./pages/WeatherApp"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage"

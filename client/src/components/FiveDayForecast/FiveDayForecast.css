@@ -6,15 +6,9 @@
  
     overflow-y: hidden;
     white-space: nowrap;
-<<<<<<< HEAD
- }
- 
- #scrollContainer5::-webkit-scrollbar {
-=======
 }
 
 #scrollContainer::-webkit-scrollbar {
->>>>>>> 5ae57939afde4187e8c5116ebe304fce70498d0f
     display: none;
  }
  
@@ -40,8 +34,6 @@
  
  p {
     font-size: 12px;
-<<<<<<< HEAD
-=======
 } */
 
 
@@ -115,5 +107,4 @@
  
  .clear-day #scrollContainer5 {
     background-color: rgba(255, 255, 255, 0.7);
->>>>>>> 5ae57939afde4187e8c5116ebe304fce70498d0f
  }

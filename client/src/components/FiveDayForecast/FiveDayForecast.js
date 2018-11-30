@@ -24,15 +24,15 @@ const FiveDayForecast = props => {
         </h3>
     
         <h4> Temp High:
-          {props.dailyTempHigh}
+          {props.dailyTempHigh}°
         </h4>
         
         <h4> Temp Low:
-          {props.dailyTempLow}
+          {props.dailyTempLow}°
         </h4>
         
         <h4>Precipitation:
-          {props.dailyPrecip}
+          {props.dailyPrecip}%
         </h4>
 
 

@@ -20,11 +20,11 @@ const HourlyForecast = props => {
       </h3>
   
       <h4> Temp:
-        {props.hourlyTemp}
+        {props.hourlyTemp}°
       </h4>
       
       <h4>Precipitation:
-        {props.hourlyPrecip}
+        {props.hourlyPrecip}%
       </h4>
     </div>
 );

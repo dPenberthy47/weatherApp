@@ -9,7 +9,7 @@ const Navbar = props => {
       <div className="nav-wrapper">
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <a href="collapsible.html"> <i className="material-icons">person_add</i>
+            <a href="/LoginPage"> <i className="material-icons">person_add</i>
             </a>
           </li>
         </ul>

@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import Navbar from "../../components/Navbar";
 import LocationSearch from "../../components/LocationSearch";
 import Jumbotron from "../../components/Jumbotron";
-import WeatherDisplay from "../../components/WeatherDisplay";
+import CurrentWeather from "../../components/CurrentWeather";
 import HourlyForecast from "../../components/HourlyForecast";
 import DarkskyMap from 'react-darksky-map';
 //import Map from "../../components/Map";
@@ -141,7 +141,7 @@ class WeatherApp extends Component {
                 />
 
                 <Jumbotron>
-                    <WeatherDisplay
+                    <CurrentWeather
                         image={this.state.image}
                         currentTemp={this.state.currentTemp}
                         feelsLike={this.state.feelsLike}
@@ -152,31 +152,31 @@ class WeatherApp extends Component {
                 </Jumbotron>
 
                 <div id="scrollContainer">
-                {this.state.hourlyWeather.map((hourly, i) => (
-                    <HourlyForecast
-                        hourlyIcon={hourly.icon}
-                        hourlyTime={hourly.time}
-                        hourlyTemp= {hourly.temperature}
-                        hourlyPrecip={hourly.precipProbability}
-                        key={i}
-                    />
-                ))}
-                </div>
+               {(this.state.hourlyWeather.slice(0, 24)).map((hourly, i) => (
+                   <HourlyForecast
+                       hourlyIcon={hourly.icon}
+                       hourlyTime={hourly.time}
+                       hourlyTemp= {hourly.temperature}
+                       hourlyPrecip={hourly.precipProbability}
+                       key={i}
+                   />
+               ))}
+               </div>
 
 
-                  <div id="scrollContainer5">
-                {this.state.dailyWeather.map((daily, i) => (
-                    <FiveDayForecast
-                        date={daily.time}
-                        dailyIcon={daily.icon}
-                        dailySummary={daily.summary}
-                        dailyTempHigh= {daily.temperatureMax}
-                        dailyTempLow= {daily.temperatureMin}
-                        dailyPrecip={daily.precipProbability}
-                        key2={i}
-                    />
-                ))} 
-                </div>
+                 <div id="scrollContainer5">
+               {(this.state.dailyWeather.slice(0,5)).map((daily, i) => (
+                   <FiveDayForecast
+                       date={daily.time}
+                       dailyIcon={daily.icon}
+                       dailySummary={daily.summary}
+                       dailyTempHigh= {daily.temperatureMax}
+                       dailyTempLow= {daily.temperatureMin}
+                       dailyPrecip={daily.precipProbability}
+                       key2={i}
+                   />
+               ))}
+               </div>
 
                <DarkskyMap lat={this.state.latitude} lng={this.state.longitude} zoom={8} mapField="temp" />
 

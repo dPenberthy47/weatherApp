@@ -1,0 +1,74 @@
+.clear-day {
+    background-image: url('../../img/clear-day.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+ }
+ 
+ .clear-night {
+    background-image: url('../../img/clear-night.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: yellow;
+ }
+ 
+ .rain {
+    background-image: url('../../img/rainy.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    color: white;
+ }
+ 
+ .rain .WeatherDisplay {
+    background-color: rgba(0, 0, 0, 0.1);
+ }
+ 
+ .snow {
+    background-image: url('../../img/snowy.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+ }
+ 
+.fog {
+    background-image: url('../../img/foggy.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+ }
+ 
+ .cloudy-day {
+    background-image: url('../../img/cloudy-day.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+ }
+ 
+ #cloudy-night {
+    background-image: url('../../img/cloudy-night.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    color: yellow;
+ }

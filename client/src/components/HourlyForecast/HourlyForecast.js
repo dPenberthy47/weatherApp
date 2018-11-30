@@ -13,7 +13,6 @@ const HourlyForecast = props => {
          {moment(props.hourlyTime * 1000).format("h:mm A")}
          {/* {moment(props.hourlyTime * 1000).fromNow()} */}
       </h3>
-     
       <h4> Temp: {Math.round(props.hourlyTemp)}°
       </h4>
       

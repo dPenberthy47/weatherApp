@@ -1,6 +1,8 @@
-h1 h2 h3 h4 h5 h6 p {
-    font-family: 'Exo 2', sans-serif;
- }
+.currentTemp {
+    /* float: left;
+    clear: "both"; */
+};
+
 
  /* h1.currentTemp {
     
@@ -115,3 +117,5 @@ h1 h2 h3 h4 h5 h6 p {
     height: 100%;
     color: yellow;
  }
+
+

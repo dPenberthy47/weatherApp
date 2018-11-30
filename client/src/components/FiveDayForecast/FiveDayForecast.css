@@ -1,5 +1,4 @@
-#scrollContainer5 {
-
+/* #scrollContainer {
     padding-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(70, 130, 180, 0.3);
@@ -7,9 +6,15 @@
  
     overflow-y: hidden;
     white-space: nowrap;
+<<<<<<< HEAD
  }
  
  #scrollContainer5::-webkit-scrollbar {
+=======
+}
+
+#scrollContainer::-webkit-scrollbar {
+>>>>>>> 5ae57939afde4187e8c5116ebe304fce70498d0f
     display: none;
  }
  
@@ -35,4 +40,80 @@
  
  p {
     font-size: 12px;
+<<<<<<< HEAD
+=======
+} */
+
+
+
+
+#backgroundPlaceholderContainer {
+    background-image: url('https://wallpapercave.com/wp/vgjD5VS.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+ }
+ 
+ #scrollContainer5 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(70, 130, 180, 0.3);
+    overflow-y: hidden;
+    white-space: nowrap;
+ }
+ 
+ #scrollContainer5::-webkit-scrollbar {
+    display: none;
+ }
+ 
+ .fiveDayForecast {
+    border-right: 1px solid rgba(70, 130, 180, 0.5);
+    text-align: center;
+    display: inline-block;
+    padding-left: 85px;
+    padding-right: 85px;
+ }
+ 
+ .fiveDayForecast:last-of-type {
+    border-right: none;
+ }
+ 
+ .text h4 {
+ display: inline-block;
+ }
+ 
+ .text h4:first-of-type {
+    padding-right: 10px;
+ }
+ 
+ h3 {
+    font-size: 24px;
+ }
+ 
+ h4 {
+    font-size: 20px;
+ }
+ 
+ p {
+    font-size: 12px;
+ }
+ 
+ .snow #scrollContainer5 {
+    background-color: rgba(211, 211, 211, 0.8);
+ }
+ 
+ .rain #scrollContainer5 {
+    background-color: rgba(0, 0, 0, 0.1);
+ }
+ 
+ .fog #scrollContainer5 {
+    background-color: rgba(211, 211, 211, 0.9);
+ }
+ 
+ .cloudy-night #scrollContainer5 {
+    background-color: rgba( 20, 20, 20, 0.2);
+ }
+ 
+ .clear-day #scrollContainer5 {
+    background-color: rgba(255, 255, 255, 0.7);
+>>>>>>> 5ae57939afde4187e8c5116ebe304fce70498d0f
  }

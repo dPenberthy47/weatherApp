@@ -10,7 +10,6 @@ import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
 
-
 class WeatherApp extends Component {
     state = {
         geoCode: [],
@@ -80,6 +79,27 @@ class WeatherApp extends Component {
                             precipChance: res.data.currently.precipProbability,
                             currentTime: res.data.currently.time
                         })
+                        if (this.state.image === "clear-day") {
+                            this.setState({ backgroundImage: "clear-day" });
+                        } else if (this.state.image === "clear-night") {
+                            this.setState({ backgroundImage: "clear-night" });
+                        } else if (this.state.image === "rain") {
+                            this.setState({ backgroundImage: "rain" });
+                        } else if (this.state.image === "snow") {
+                            this.setState({ backgroundImage: "snow" });
+                        } else if (this.state.image === "sleet") {
+                            this.setState({ backgroundImage: "snow" });
+                        } else if (this.state.image === "wind") {
+                            this.setState({ backgroundImage: "wind" });
+                        } else if (this.state.image === "fog") {
+                            this.setState({ backgroundImage: "fog" });
+                        } else if (this.state.image === "cloudy") {
+                            this.setState({ backgroundImage: "cloudy-day" });
+                        } else if (this.state.image === "partly-cloudy-day") {
+                            this.setState({ backgroundImage: "cloudy-day" });
+                        } else if (this.state.image === "partly-cloudy-night") {
+                            this.setState({ backgroundImage: "cloudy-night" });
+                        }
                         console.log(this.state.currentWeather);
                         // console.log(this.state.hourlyWeather);
                         console.log(`
@@ -142,7 +162,27 @@ class WeatherApp extends Component {
                             dewPoint: res.data.currently.dewPoint,
                             precipChance: res.data.currently.precipProbability,
                         })
-                        // this.setBackgroundImage();
+                        if (this.state.image === "clear-day") {
+                            this.setState({ backgroundImage: "clear-day" });
+                        } else if (this.state.image === "clear-night") {
+                            this.setState({ backgroundImage: "clear-night" });
+                        } else if (this.state.image === "rain") {
+                            this.setState({ backgroundImage: "rain" });
+                        } else if (this.state.image === "snow") {
+                            this.setState({ backgroundImage: "snow" });
+                        } else if (this.state.image === "sleet") {
+                            this.setState({ backgroundImage: "snow" });
+                        } else if (this.state.image === "wind") {
+                            this.setState({ backgroundImage: "wind" });
+                        } else if (this.state.image === "fog") {
+                            this.setState({ backgroundImage: "fog" });
+                        } else if (this.state.image === "cloudy") {
+                            this.setState({ backgroundImage: "cloudy-day" });
+                        } else if (this.state.image === "partly-cloudy-day") {
+                            this.setState({ backgroundImage: "cloudy-day" });
+                        } else if (this.state.image === "partly-cloudy-night") {
+                            this.setState({ backgroundImage: "cloudy-night" });
+                        }
                         console.log(this.state.currentWeather);
                         console.log(`
                         Time Zone: ${this.state.timeZone}
@@ -166,7 +206,7 @@ class WeatherApp extends Component {
     render() {
         return (
             <div>
-                <div id={this.state.image} >
+                <div id={this.state.backgroundImage} >
                     <Navbar
                         value={this.state.search}
                         handleInputChange={this.handleInputChange}

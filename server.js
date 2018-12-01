@@ -5,10 +5,10 @@ const passport = require('passport');
 const config = require('./config');
 const PORT = process.env.PORT || 3001;
 const app = express();
+const mongoose = require('mongoose');
 
 // connect to the database and load models
 require('./models').connect(config.dbUri);
-
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -43,8 +43,6 @@ app.get("*", function(req, res) {
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/weatherapp"
 );
-
-
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);

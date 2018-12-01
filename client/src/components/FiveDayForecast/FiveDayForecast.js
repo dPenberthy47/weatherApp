@@ -43,11 +43,11 @@ import moment from 'moment';
 const FiveDayForecast = props => {
    return (
      <div className="fiveDayForecast">
-       <h3>
+       <h3 id="dailyDate">
          <canvas className={props.dailyIcon} width="75" height="75"></canvas>
        </h3>
 
-       <h3>
+       <h3 id="summary">
        {moment(props.date * 1000).format("dddd")} - {moment(props.date * 1000).format("MM/DD")}
       </h3>
 

@@ -6,8 +6,9 @@ const CurrentWeather = props => (
     style={{ height: 300, clear: "both", paddingTop: 5, textAlign: "center" }}
     className="CurrentWeather"
   >
-    {/* <img alt={props.name} src={props.image} /> */}
-    <div>
+    {/*          {moment(props.hourlyTime * 1000).tz(props.timeZone).format("h:mm A")}
+ /> */}
+    <div> 
       <h1 className="currentTemp">{Math.round(props.currentTemp)}°</h1>
     </div>
     <div>

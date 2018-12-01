@@ -1,7 +1,8 @@
-/*import React, {Component} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {DARK_SKY} from "../../utils/config" ;
 
-class DarkskyMap extends Component {
+class Map extends Component {
     constructor (props) {
         super(props);
 
@@ -25,22 +26,22 @@ class DarkskyMap extends Component {
     }
 
     shouldComponentUpdate () {
-        return false;
+        return true;
     }
 
     url () {
-        const {
+        let {
             lat, lng, zoom, units, fieldControl, timeControl, mapField,
         } = this.props;
 
-        const field = this.availableFields[mapField];
+        let field = this.availableFields[mapField];
         if (!field) throw new Error('Invalid mapField.');
 
         const domain = encodeURIComponent(window.location.href);
 
         let url = `https://maps.darksky.net/@${field},${lat},${lng},${zoom}
             ?domain=${domain}
-            &auth=1527719406_d7fc33ad02f802febbb1fdba99657748
+            &auth=${DARK_SKY}
             &embed=true
             &fieldControl=${fieldControl.toString()}
             &timeControl=${timeControl.toString()}
@@ -73,7 +74,7 @@ class DarkskyMap extends Component {
     }
 
     render () {
-        const {
+        let {
             lat, lng, zoom, units, fieldControl, timeControl, mapField, onLoad, ...others
         } = this.props;
 
@@ -81,7 +82,7 @@ class DarkskyMap extends Component {
     }
 }
 
-DarkskyMap.propTypes = {
+Map.propTypes = {
     lat: PropTypes.number.isRequired,
     lng: PropTypes.number.isRequired,
     zoom: PropTypes.number,
@@ -92,14 +93,14 @@ DarkskyMap.propTypes = {
     onLoad: PropTypes.func,
 };
 
-DarkskyMap.defaultProps = {
+Map.defaultProps = {
     zoom: 4,
     mapField: 'temp',
     timeControl: true,
     fieldControl: true,
-    units: 'metric',
+    units: 'imperial',
     width: '100%',
     height: '500px',
 };
 
-export default DarkskyMap;*/
+export default Map;

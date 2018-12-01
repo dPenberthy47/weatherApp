@@ -84,6 +84,7 @@ class Main extends Component {
               <div className="top-bar-left">
                 <Link to="/">Weather Watch</Link>
               </div>
+
               {this.state.authenticated ? (
                 <div className="top-bar-right">
                   <Link to="/dashboard">Dashboard</Link>
@@ -97,6 +98,8 @@ class Main extends Component {
               )}
 
             </div> */}
+            </div>
+ master
 
             <PropsRoute exact path="/" component={WeatherApp} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
             <PrivateRoute path="/dashboard" component={DashboardPage}/>

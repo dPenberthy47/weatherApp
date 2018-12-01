@@ -38,7 +38,9 @@ const Navbar = props => {
       <div className="nav-wrapper">
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <a href="/login"> <i className="material-icons">person_add</i>
+
+            <a href="/Login"> <i className="material-icons">person_add</i>
+
             </a>
           </li>
         </ul>

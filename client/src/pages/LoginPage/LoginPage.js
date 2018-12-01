@@ -9,13 +9,13 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import HomePage from '../../loginComponents/HomePage';
+// import HomePage from '../../loginComponents/HomePage';
 import LoginPage from '../../loginContainers/LoginPage';
 import LogoutFunction from '../../loginContainers/LogoutFunction';
 import SignUpPage from '../../loginContainers/SignUpPage';
 import DashboardPage from '../../loginContainers/DashboardPage';
 import Auth from '../../modules/Auth';
-import Navbar from '../../components/Navbar';
+// import Navbar from '../../components/Navbar';
 import WeatherApp from '../WeatherApp';
 
 // remove tap delay, essential for MaterialUI to work properly

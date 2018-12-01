@@ -98,8 +98,8 @@ class Main extends Component {
               )}
 
             </div> */}
-            </div>
- master
+            
+
 
             <PropsRoute exact path="/" component={WeatherApp} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
             <PrivateRoute path="/dashboard" component={DashboardPage}/>

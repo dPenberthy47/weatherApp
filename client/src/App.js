@@ -1,6 +1,5 @@
 
 import React from "react";
-import WeatherApp from "./pages/WeatherApp"
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import WeatherApp from "./pages/WeatherApp"
@@ -34,11 +33,7 @@ const App = () => (
       </Switch>
     </div>
   </Router>
-  // </Navbar>
 
-      </Switch>
-    </div>
-  </Router>
 
 );
 export default App;

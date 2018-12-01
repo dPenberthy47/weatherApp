@@ -16,8 +16,8 @@ class WeatherApp extends Component {
     state = {
         geoCode: [],
         address: "dallas,tx",
-        latitude: parseInt(""),
-        longitude: parseInt(""),
+        latitude: 32.7767,
+        longitude: -96.7970,
         image: "",
         alert: "",
         currently: "",
@@ -29,9 +29,7 @@ class WeatherApp extends Component {
         precipChance: "",
         currentWeather: [],
         dailyWeather: [],
-        nextFiveDays: [],
         hourlyWeather: [],
-        nextEighteenHours: [],
         backgroundImage: ""
     };
 

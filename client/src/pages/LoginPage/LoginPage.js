@@ -15,7 +15,7 @@ import LogoutFunction from '../../loginContainers/LogoutFunction';
 import SignUpPage from '../../loginContainers/SignUpPage';
 import DashboardPage from '../../loginContainers/DashboardPage';
 import Auth from '../../modules/Auth';
-// import Navbar from '../../components/Navbar';
+import NavbarLoginPage from '../../components/NavbarLoginPage';
 import WeatherApp from '../WeatherApp';
 
 // remove tap delay, essential for MaterialUI to work properly
@@ -73,11 +73,14 @@ class Main extends Component {
 
   render() {
     return (
+      <div>
+        <NavbarLoginPage />
+      
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <Router>
           <div>
 
-            <div className="top-bar">
+            {/* <div className="top-bar">
               <div className="top-bar-left">
                 <Link to="/">Weather Watch</Link>
               </div>
@@ -93,7 +96,7 @@ class Main extends Component {
                 </div>
               )}
 
-            </div>
+            </div> */}
 
             <PropsRoute exact path="/" component={WeatherApp} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
             <PrivateRoute path="/dashboard" component={DashboardPage}/>
@@ -104,6 +107,7 @@ class Main extends Component {
 
         </Router>
       </MuiThemeProvider>
+      </div>
     );
   }
 }

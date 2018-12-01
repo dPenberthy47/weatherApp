@@ -3,11 +3,11 @@ import API from "../../utils/API";
 import GeoCodeAPI from "../../utils/GeoCodeAPI";
 import Navbar from "../../components/Navbar";
 // import WeatherAlert from "../../components/WeatherAlert";
-import Jumbotron from "../../components/Jumbotron";
+// import Jumbotron from "../../components/Jumbotron";
 import WeatherIcons from "../../components/WeatherIcons";
 import CurrentWeather from "../../components/CurrentWeather";
 import HourlyForecast from "../../components/HourlyForecast";
-import DarkskyMap from 'react-darksky-map';
+import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
 
@@ -16,8 +16,8 @@ class WeatherApp extends Component {
     state = {
         geoCode: [],
         address: "dallas,tx",
-        latitude: "32.7767",
-        longitude: "-96.7970",
+        latitude: 32.7767,
+        longitude: -96.7970,
         image: "",
         alert: "",
         currently: "",
@@ -29,9 +29,7 @@ class WeatherApp extends Component {
         precipChance: "",
         currentWeather: [],
         dailyWeather: [],
-        nextFiveDays: [],
         hourlyWeather: [],
-        nextEighteenHours: [],
         backgroundImage: ""
     };
 
@@ -104,7 +102,7 @@ class WeatherApp extends Component {
                         })
                         this.setBackgroundImage();
                         console.log(this.state.currentWeather);
-                        console.log(this.state.hourlyWeather);
+                        // console.log(this.state.hourlyWeather);
                         console.log(`
                         Current Temp: ${this.state.currentTemp} 
                         Feels Like: ${this.state.feelsLike}
@@ -122,7 +120,7 @@ class WeatherApp extends Component {
             .catch(error => console.log(error));
     };  //closes handleFormSubmit
 
-    componentWillMount() {
+    componentDidMount() {
         GeoCodeAPI.search(
             this.state.address,
             console.log(`
@@ -189,8 +187,8 @@ class WeatherApp extends Component {
 
                     {/* <WeatherAlert /> */}
 
-                    {/* <Jumbotron> */}
                     <WeatherIcons />
+
                     <CurrentWeather
                         image={this.state.image}
                         currentSummary={this.state.currentSummary}
@@ -199,7 +197,6 @@ class WeatherApp extends Component {
                         dailyLow={this.state.dailyLow}
                         dailyHigh={this.state.dailyHigh}
                     />
-                    {/* </Jumbotron> */}
 
                     <div id="scrollContainer">
                         {(this.state.hourlyWeather.slice(1, 19)).map((hourly, i) => (
@@ -227,12 +224,12 @@ class WeatherApp extends Component {
                         ))}
                     </div>
                 </div>
-                <DarkskyMap
+
+                <Map
                     lat={this.state.latitude}
                     lng={this.state.longitude}
                     zoom={8}
-                    mapField="temp"
-                />
+                    mapField="temp" />
 
                 <Footer />
             </div>

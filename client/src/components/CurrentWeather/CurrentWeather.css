@@ -1,35 +1,44 @@
-h1 h2 h3 h4 h5 h6 p {
-    font-family: 'Exo 2', sans-serif;
+.CurrentWeather {
+   height: 300px;
+   clear: both;
+   padding-top: 5px;
+   text-align: center;
 }
 
-#currentRange h6 {
+.dailyRange h6 {
     display: inline-block;
-}
-
-#currentRange h6:first-of-type {
+ }
+ h6 {
+    font-size: 32px;
+ }
+ .currentTemp {
+    font-size: 72px;
+ }
+ 
+.dailyRange h6:first-of-type {
     padding-right: 10px;
-}
-
-#clear-day {
+ }
+ 
+ #clear-day {
     background-image: url('../../img/clear-day.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
-}
-
-#clear-night {
+ }
+ 
+ #clear-night {
     background-image: url('../../img/clear-night.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
-    color: yellow;
-}
-
-#rain {
+    color: rgba(190, 190, 11, 0.95);
+ }
+ 
+ #rain {
     background-image: url('../../img/rainy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -38,13 +47,13 @@ h1 h2 h3 h4 h5 h6 p {
     background-repeat: no-repeat;
     height: 100%;
     color: white;
-}
-
-#rain .WeatherDisplay {
+ }
+ 
+ #rain .CurrentWeather {
     background-color: rgba(0, 0, 0, 0.1);
-}
-
-#snow {
+ }
+ 
+ #snow {
     background-image: url('../../img/snowy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -52,9 +61,9 @@ h1 h2 h3 h4 h5 h6 p {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
-}
-
-#fog {
+ }
+ 
+ #fog {
     background-image: url('../../img/foggy.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -62,9 +71,9 @@ h1 h2 h3 h4 h5 h6 p {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
-}
-
-#cloudy-day {
+ }
+ 
+ #cloudy-day {
     background-image: url('../../img/cloudy-day.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -72,9 +81,19 @@ h1 h2 h3 h4 h5 h6 p {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
-}
+ }
 
-#cloudy-night {
+ #partly-cloudy-day {
+    background-image: url('../../img/cloudy-day.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+ }
+ 
+ #cloudy-night {
     background-image: url('../../img/cloudy-night.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -82,5 +101,50 @@ h1 h2 h3 h4 h5 h6 p {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
-    color: yellow;
+    color: rgba(190, 190, 11, 0.95);
+ }
+
+ #partly-cloudy-night {
+    background-image: url('../../img/cloudy-night.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    color: rgba(190, 190, 11, 0.95);
+ }
+
+ #wind {
+   background-image: url('../../img/windy.jpg');
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   background-repeat: no-repeat;
 }
+
+@media screen and (max-width: 650px) and (min-width: 500px) {
+   .CurrentWeather h6 {
+      font-size: 28px;
+   }
+}
+
+@media screen and (max-width: 500px) and (min-width: 400px) {
+   .CurrentWeather h6 {
+      font-size: 24px;
+   }
+}
+
+@media screen and (max-width: 400px) and (min-width: 300px) {
+   .CurrentWeather h3 {
+      font-size: 64px;
+   }
+   .CurrentWeather h6 {
+      font-size: 20px;
+   }
+   .CurrentWeather {
+      height: 250px;
+   }
+}
+
